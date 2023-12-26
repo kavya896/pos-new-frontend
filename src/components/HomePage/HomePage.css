@@ -1,0 +1,107 @@
+.bar{
+    background-color: rgba(234, 230, 230, 0.915);
+    width: 100%;
+    height: 695px;
+}
+.mainbar{
+    background-color: rgb(78, 196, 78);
+}
+.sidebar{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 70px;
+    height: 646px;
+
+}
+
+.iconStyling:hover {
+ background-color: rgba(199, 184, 184, 0.915);
+}
+
+.account:hover+ .accountDiv {
+    display: block;
+   
+}
+
+.accountDiv, .reportDiv, .itemsDiv, .inventoryDiv, .employeesDiv, .customersDiv, .integrationsDiv, .settingsDiv,.helpDiv{
+    
+    display: none;
+    margin-top: -21px;
+    margin-left: 78px;
+    background-color: rgb(88, 87, 87);
+    color: white;
+    border-radius: 20%;
+    font-size: 11px;
+    width: 40px;
+    height: 17px;
+    padding: 2px;
+}
+.itemsDiv{
+    width: 28px;
+    height: 17px;
+}
+.inventoryDiv{
+    width: 111px;
+    height: 17px;
+}
+.employeesDiv{
+    width: 53px;
+    height: 17px;
+}
+.customersDiv{
+    width: 53px;
+    height: 17px;
+}
+.integrationsDiv{
+    width: 59px;
+    height: 17px;
+}
+.settingsDiv{
+    width: 40px;
+    height: 17px;
+}
+.helpDiv{
+    width: 23px;
+    height: 17px;
+}
+.report:hover+ .reportDiv {
+    display: block;
+   
+}
+
+.items:hover+ .itemsDiv {
+    display: block;
+   
+}
+.inventory:hover+ .inventoryDiv {
+    display: block;
+   
+}
+.employees:hover+ .employeesDiv {
+    display: block;
+   
+}
+.customers:hover+ .customersDiv {
+    display: block;
+   
+}
+.integrations:hover+ .integrationsDiv {
+    display: block;
+   
+}
+
+.settings:hover+ .settingsDiv {
+    display: block;
+   
+}
+.help:hover+ .helpDiv {
+    display: block;
+   
+} 
+
+.menu{
+    text-decoration: none;
+    margin-top: -20px;
+}
+

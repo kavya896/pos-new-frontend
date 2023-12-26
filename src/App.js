@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+import LoginPage from "./components/loginPage/loginPage";
 import './App.css';
+import {BrowserRouter as Router,Route,Routes} from "react-router-dom"
+import PinPage from "./components/loginPage/pin";
+import HomePage from "./components/HomePage/HomePage";
+import Items from "./components/Items/Items";
+
 
 function App() {
+
+
+
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+  console.log("from app.js page",userInfo)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+    <Router>
+      {userInfo && <HomePage/>}
+      <Routes>
+     
+        <Route path="/" element={userInfo?"":<LoginPage/>} />
+        <Route path="/pin" element={userInfo?"":<PinPage/>} ></Route>
+        <Route path="/dashboard" element={<HomePage/>} ></Route>
+        <Route path="/addItems" element={<Items/>} ></Route>
+      </Routes>
+    </Router>
+  
+   
+    
   );
 }
 
