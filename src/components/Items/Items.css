@@ -17,4 +17,11 @@
 .addItems{
    
    margin: 20px;
+   
+}
+.inputfields{
+    display: flex;
+    flex-direction: row;
+    margin-left: 726px;
+    margin-top: -50px;
 }

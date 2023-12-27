@@ -24,19 +24,19 @@ export const login = (email,password) =>async(dispatch)=>{
 }
 
 
-export const ingredientsList = () => async(dispatch)=>{
+export const categoryList = () => async(dispatch)=>{
     try{
         const config={
             headers:{
                 "Content-type":"application/json"
             }
         }
-        const {data} = await axios.get("/api/listunit")
+        const {data} = await axios.get("/api/category")
         console.log("list from actions",data)
-        dispatch({type:"IngredientSuccess",payload:data})
+        dispatch({type:"CategorySuccess",payload:data})
 
     }catch(err){
-        dispatch({type:"IngredientFail",payload:err})
+        dispatch({type:"categoryFail",payload:err})
         console.log(err)
     }
 }
