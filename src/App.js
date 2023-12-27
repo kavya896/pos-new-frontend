@@ -4,6 +4,7 @@ import {BrowserRouter as Router,Route,Routes} from "react-router-dom"
 import PinPage from "./components/loginPage/pin";
 import HomePage from "./components/HomePage/HomePage";
 import Items from "./components/Items/Items";
+import AddItem from "./components/AddItem/AddItem";
 
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
         <Route path="/" element={userInfo?"":<LoginPage/>} />
         <Route path="/pin" element={userInfo?"":<PinPage/>} ></Route>
         <Route path="/dashboard" element={<HomePage/>} ></Route>
-        <Route path="/addItems" element={<Items/>} ></Route>
+        <Route path="/addItems" element={<AddItem/>} ></Route>
+        <Route path="/itemsList" element={<Items/>}></Route>
       </Routes>
     </Router>
   

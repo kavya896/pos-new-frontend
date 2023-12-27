@@ -4,15 +4,21 @@
     height: 695px;
 }
 .mainbar{
+    
     background-color: rgb(78, 196, 78);
-}
+  
+   
+    
+} 
 .sidebar{
+   
     background-color: white;
     display: flex;
     flex-direction: column;
     width: 70px;
     height: 646px;
-
+   /* margin-top: 48px; */
+   
 }
 
 .iconStyling:hover {
@@ -25,7 +31,7 @@
 }
 
 .accountDiv, .reportDiv, .itemsDiv, .inventoryDiv, .employeesDiv, .customersDiv, .integrationsDiv, .settingsDiv,.helpDiv{
-    
+    z-index: 1;
     display: none;
     margin-top: -21px;
     margin-left: 78px;
@@ -103,5 +109,6 @@
 .menu{
     text-decoration: none;
     margin-top: -20px;
+  
 }
 

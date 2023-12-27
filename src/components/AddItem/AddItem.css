@@ -8,13 +8,9 @@
     
 }
 .itemspage-setup{
-    background-color: white;
+    background-color: rgb(165, 89, 89);
     /* height: 633px; */
     position: absolute;
     overflow: auto;
     width: 100%;
-}
-.addItems{
-   
-   margin: 20px;
 }

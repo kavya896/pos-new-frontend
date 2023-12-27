@@ -22,6 +22,7 @@ const HomePage = () => {
                 <DehazeIcon style={{ margin: "10px", color: "white" }} />
 
             </div>
+         
             <div className="sidebar">
                 <div className="iconStyling account" onClick={()=>setOpen(true)}>
                     <AccountCircleSharpIcon fontSize="medium"  style={{ margin: "12px 20px", color: "rgba(212, 208, 208, 0.86)" }} />
@@ -31,9 +32,9 @@ const HomePage = () => {
                     account
                 </div>
                 <div >
-                    <Menu open={open} onClose={()=>setOpen(false)} style={{marginTop:"-500px",marginLeft:"55px"}} >
+                    <Menu open={open} onClose={()=>setOpen(false)} style={{marginLeft:"55px",marginTop:"-520px"}}  >
                       
-                        <MenuItem style={{width:"200px"}}><a href="/" style={{textDecoration:"none", color:"black"}}>Account</a></MenuItem>
+                        <MenuItem ><a href="/" style={{textDecoration:"none", color:"black"}}>Account</a></MenuItem>
                         <MenuItem><a href="/" style={{textDecoration:"none",color:"black"}}>Sign out</a></MenuItem>
                        
                     </Menu>
@@ -46,9 +47,9 @@ const HomePage = () => {
                     Reports
                 </div>
                 <div >
-                    <Menu open={report} onClose={()=>setReport(false)} style={{marginTop:"-380px",marginLeft:"55px"}} >
+                    <Menu open={report} onClose={()=>setReport(false)}   style={{marginLeft:"55px",marginTop:"-400px"}}>
                       
-                        <MenuItem style={{width:"200px"}}><a href="/" style={{textDecoration:"none", color:"black"}}>Sales summary</a></MenuItem>
+                        <MenuItem ><a href="/" style={{textDecoration:"none", color:"black"}}>Sales summary</a></MenuItem>
                         <MenuItem><a href="/" style={{textDecoration:"none",color:"black"}}>Sales by item</a></MenuItem>
                         <MenuItem><a href="/" style={{textDecoration:"none",color:"black"}}>Sales by category</a></MenuItem>
                         <MenuItem><a href="/" style={{textDecoration:"none",color:"black"}}>Sales by employee</a></MenuItem>
@@ -63,9 +64,9 @@ const HomePage = () => {
                     Items
                 </div>
                 <div >
-                    <Menu open={item} onClose={()=>setItem(false)} style={{marginTop:"-350px",marginLeft:"55px"}} >
+                    <Menu open={item} onClose={()=>setItem(false)}  style={{marginLeft:"55px",marginTop:"-350px"}}  >
                       
-                        <MenuItem style={{width:"200px"}}><a href="/" style={{textDecoration:"none", color:"black"}}>Item list</a></MenuItem>
+                        <MenuItem><a href="/itemsList" style={{textDecoration:"none", color:"black"}}>Item list</a></MenuItem>
                         <MenuItem><a href="/" style={{textDecoration:"none",color:"black"}}>Categories</a></MenuItem>
                         <MenuItem><a href="/" style={{textDecoration:"none",color:"black"}}>Modifiers</a></MenuItem>
                         <MenuItem><a href="/" style={{textDecoration:"none",color:"black"}}>Discounts</a></MenuItem>
@@ -111,7 +112,7 @@ const HomePage = () => {
 
 
             </div>
-
+            
         </div>
 
     )
