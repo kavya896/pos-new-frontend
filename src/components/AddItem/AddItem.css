@@ -1,16 +1,52 @@
-.itemspage{
+.createitemspage{
     position: relative;
     margin-left: 91px;
-    margin-top: -638px;
+    margin-top: 42px;
     background-color: rgba(234, 230, 230, 0.915);
-    height: 633px;
-    width: 80%;
+    height: 618px;
+    width: 48%;
     
 }
-.itemspage-setup{
-    background-color: rgb(165, 89, 89);
+.title{
+    margin-top: -690px;
+    margin-left: 55px;
+    color: white;
+    font-size: 23px;
+}
+.createitemspage-setup{
+    background-color: white;
     /* height: 633px; */
     position: absolute;
     overflow: auto;
     width: 100%;
+    font-family: Arial, sans-serif;
+}
+.details{
+    margin: 37px;
+}
+.name{
+    display: flex;
+    flex-direction: row;
+   
+}
+.textfieldname{
+    width: 50%;
+  
+}
+.category-textfield{
+    margin-top: 3px;
+    margin-left: 50px;
+}
+.description{
+    margin-top: 50px;
+}
+.item-checkbox{
+    margin-left: -10px;
+    display: flex;
+    margin-top: 30px;  
+}
+.radio-addItem{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
 }

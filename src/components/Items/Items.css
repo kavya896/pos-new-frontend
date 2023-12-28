@@ -1,11 +1,17 @@
 .itemspage{
     position: relative;
     margin-left: 91px;
-    margin-top: -638px;
+    margin-top: 42px;
     background-color: rgba(234, 230, 230, 0.915);
-    height: 633px;
+    height: 618px;
     width: 80%;
     
+}
+.title{
+    margin-top: -690px;
+    margin-left: 55px;
+    color: white;
+    font-size: 23px;
 }
 .itemspage-setup{
     background-color: white;
@@ -25,3 +31,4 @@
     margin-left: 726px;
     margin-top: -50px;
 }
+
