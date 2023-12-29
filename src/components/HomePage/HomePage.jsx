@@ -74,7 +74,7 @@ const HomePage = () => {
                     </Menu>
                 </div>
                 <div className="iconStyling inventory">
-                    <ShoppingCartOutlinedIcon fontSize="medium" style={{ margin: "12px 20px", color: "rgba(11, 164, 172, 0.918)" }} />
+                    <ShoppingCartOutlinedIcon fontSize="medium" style={{ margin: "0px 2px", color: "rgba(11, 164, 172, 0.918)" }} />
                 </div>
                 <div className="inventoryDiv">
                     InventoryManagement

@@ -4,8 +4,8 @@
     margin-top: 42px;
     background-color: rgba(234, 230, 230, 0.915);
     height: 618px;
-    width: 48%;
-    
+    width: 94%;
+    overflow: auto;
 }
 .title{
     margin-top: -690px;
@@ -17,12 +17,13 @@
     background-color: white;
     /* height: 633px; */
     position: absolute;
-    overflow: auto;
-    width: 100%;
+    
+    width: 53%;
     font-family: Arial, sans-serif;
 }
 .details{
     margin: 37px;
+    
 }
 .name{
     display: flex;
@@ -49,4 +50,63 @@
     display: flex;
     flex-direction: row;
     margin-top: 20px;
+}
+.spacing{
+    background-color:  rgba(234, 230, 230, 0.915);
+    margin-left: -36.5px;
+    width: 111%;
+    margin-top: 42px;
+    height: 20px;
+}
+
+.inventory{
+    margin: 20px;
+    
+}
+.variants{
+    margin: 26px;
+}
+.spicelevel{
+    display: flex;
+    flex-direction: row;
+    margin: 26px;
+}
+.switchStyling{
+    margin-top: -11px;
+    margin-left: 552px;
+}
+.shapes{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+}
+.colorshapesStyling{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20px;
+}
+.colorshapes{
+    height: 54px;
+    
+    width: 35px;
+    margin: 10px;
+    box-shadow: 5px;
+    border-radius: 5%;
+}
+.shapesStyling{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+}
+.shape{
+    height: 54px;
+    width: 57px;
+    margin: 5px;
+    margin-top: 20px;
+}
+.image-background{
+    background-color: #b8b1b154;
+    height: 150px;
+    width: 128px;
+    margin-left: 295px;
 }
