@@ -1,11 +1,10 @@
 .itemspage{
     position: relative;
     margin-left: 91px;
-    margin-top: 42px;
+    margin-top: 25px;
     background-color: rgba(234, 230, 230, 0.915);
-    height: 618px;
-    width: 80%;
-    
+    height: 629px;
+    overflow: auto;
 }
 .title{
     margin-top: -690px;
@@ -18,7 +17,8 @@
     /* height: 633px; */
     position: absolute;
     overflow: auto;
-    width: 100%;
+    width: 80%;
+    margin-right: 20px;
 }
 .addItems{
    
@@ -31,4 +31,12 @@
     margin-left: 726px;
     margin-top: -50px;
 }
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 5px;
+}
+
 
