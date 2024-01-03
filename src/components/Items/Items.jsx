@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Autocomplete, Button, Checkbox, Dialog, InputLabel, Menu, MenuItem, Pagination, Select, Stack, TablePagination, TextField } from "@mui/material";
 import "./Items.css"
 import { useDispatch, useSelector } from "react-redux"
-import { ItemsList, categoryList } from "../../Actions/login";
+import { ItemsList, categoryList,paginationOfItems } from "../../Actions/login";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import Table from '@mui/material/Table';
@@ -21,7 +21,7 @@ const Items = () => {
 
 
     const [pageNo, setPageNo] = useState(1)
-    const [rowsperpage, setRowsperpage] = useState(5)
+    const [rowsPerPage, setRowsperpage] = useState(10)
 
     const [select, setSelect] = useState([])
     const [open, setOpen] = useState(false)
@@ -37,19 +37,33 @@ const Items = () => {
     const { category } = useSelector((state) => state.category)
     const { items } = useSelector((state) => state.items)
 
+    var rows = items
+
+
     const handleChange = (e)=>{
         setRowsperpage(e.target.value)
     }
 
-    // const handlePreviousPage =()=>{
+    const handlePreviousPage =()=>{
+        const newPage = pageNo - 1
+        setPageNo(newPage)
+        if(pageNo && rowsPerPage){
+            dispatch(paginationOfItems(pageNo,rowsPerPage))
+        }
+    }
 
-    // }
-
-    // const handleNextPage = ()=>{
-    //     const newpage = pageNo + 1
-    //     setPageNo(newpage)
-    //     dispatch(pageNo,rowsperpage)
-    // }
+    const handleNextPage = ()=>{
+        
+        const newPage = pageNo + 1
+        
+        setPageNo(newPage)
+        
+        if(pageNo && rowsPerPage){
+            
+         dispatch(paginationOfItems(pageNo,rowsPerPage))
+        }
+      
+    }
 
 
 
@@ -154,20 +168,20 @@ const Items = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {items && items.map((item) => (
+                                {rows && rows.map((row) => (
                                     <TableRow
-                                        key={item._id}
+                                        key={row._id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell style={{ padding: "5px" }} ><Checkbox /></TableCell>
                                         <TableCell component="th" scope="row" style={{ padding: "5px" }} >
-                                            {item.name}
+                                            {row.name}
                                         </TableCell>
-                                        <TableCell style={{ padding: "5px" }} align="right">{item.category}</TableCell>
-                                        <TableCell style={{ padding: "5px" }} align="right">{item.price}</TableCell>
-                                        <TableCell style={{ padding: "5px" }} align="right">{item.cost}</TableCell>
+                                        <TableCell style={{ padding: "5px" }} align="right">{row.category}</TableCell>
+                                        <TableCell style={{ padding: "5px" }} align="right">{row.price}</TableCell>
+                                        <TableCell style={{ padding: "5px" }} align="right">{row.cost}</TableCell>
                                         <TableCell style={{ padding: "5px" }} align="right">100%</TableCell>
-                                        <TableCell style={{ padding: "5px", paddingRight: "16px" }} align="right">{item.instock}</TableCell>
+                                        <TableCell style={{ padding: "5px", paddingRight: "16px" }} align="right">{row.instock}</TableCell>
 
                                     </TableRow>
                                 ))}
@@ -178,8 +192,8 @@ const Items = () => {
                     <hr style={{ borderTop: "0.1px black" }}></hr>
                     <div  className="pageno" >
                         
-                            <ArrowBackIosIcon style={{border:"0.5px solid black",padding:"5px"}}/>
-                            <ArrowForwardIosIcon  style={{border:"0.5px solid black",padding:"5px"}}/>
+                            <ArrowBackIosIcon onClick ={handlePreviousPage} style={{border:"0.5px solid black",padding:"5px"}}/>
+                            <ArrowForwardIosIcon onClick={handleNextPage}  style={{border:"0.5px solid black",padding:"5px"}}/>
                             <InputLabel id="demo-simple-select-label"style={{marginLeft:"20px"}} >PageNo:</InputLabel>
                             <div >
                                 
@@ -190,7 +204,7 @@ const Items = () => {
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={rowsperpage}
+                            value={rowsPerPage}
                             size="small"
                             sx={{fontSize:15,padding:"0px"}}
                            

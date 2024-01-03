@@ -58,21 +58,22 @@ export const ItemsList = () => async(dispatch)=>{
     }
 }
 
-// export const paginationOfItems = (pageNo,rowsPerPage)=>async(dispatch) =>{
-//     try{
-//         const config={
-//             headers:{
-//                 "Content-type":"application/json"
-//             }
-//         }
-//         const {data} = await axios.get("/api/v1/pagination",{pageNo,rowsPerPage},config)
-//         console.log("list from actions",data)
-//         dispatch({type:"ItemSuccess",payload:data})
-//     }catch(err){
-//         dispatch({type:"ItemFail",payload:err})
-//         console.log(err)
-//     }
-// }
+export const paginationOfItems = (pageNo,rowsPerPage)=>async(dispatch) =>{
+    try{
+        console.log(pageNo,rowsPerPage)
+        const config={
+            headers:{
+                "Content-type":"application/json"
+            }
+        }
+        const {data} = await axios.get(`api/v1/pagination?pageNo=${pageNo}&rowsPerPage=${rowsPerPage}`,config)
+        console.log("list from pagination",data)
+        dispatch({type:"ItemSuccess",payload:data})
+    }catch(err){
+        dispatch({type:"ItemFail",payload:err})
+        console.log(err)
+    }
+}
 
 export const loginUsingPin = (pin) =>async(dispatch) =>{
     try{
