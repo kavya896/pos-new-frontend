@@ -11,14 +11,136 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 
 const AddItem = () => {
     const [checked, setChecked] = useState()
-    const [selectedValue, setSelectedValue] = useState()
-    const [selected, setSelected] = useState()
+
+    
     const [flag, setFlag] = useState(false)
     // const handleChange = (e)=>{}
     const handleFlag = (e) => {
         setFlag(!flag)
     }
     
+    const [name,setName] = useState()
+    const [catg,setCatg] = useState()
+    const [description,setdescription] = useState()
+    const [price,setPrice] = useState()
+    const [cost,setCost] =useState()
+    const [sku,setsku] = useState()
+    const [barcode,setBarcode] = useState()
+    const [instock,setInstock] = useState()
+    const [lowstock,setLowstock] =useState()
+    const [spicelevel,setSpicelevel] = useState(false)
+    const [selectedValue, setSelectedValue] = useState('each')
+    const [available,setAvailable] = useState(true)
+    const [selected, setSelected] = useState('colors')
+
+    const [one,setOne] = useState("#cfcaca")
+    const [two,setTwo] = useState()
+    const [third,setThird] = useState()
+    const [fourth,setFourth] = useState()
+    const [fifth,setFifth] = useState()
+    const [sixth,setSixth] = useState()
+    const [seven,setSeven] = useState()
+    const [eight,setEight] = useState()
+    const [square,setSquare] = useState("black")
+    const [circle,setCircle] = useState()
+
+    const handlesquare = () =>{
+        setSquare("black")
+        setCircle("")
+    }
+    const handleCircle = () =>{
+        setSquare("")
+        setCircle("black")
+    }
+
+    const handleOne = ()=>{
+        setOne("#cfcaca")
+        setTwo("")
+        setThird("")
+        setFourth("")
+        setFifth("")
+        setSixth("")
+        setSeven("")
+        setEight("")
+    }
+    const handletwo = ()=>{
+        setOne("")
+        setTwo("red")
+        setThird("")
+        setFourth("")
+        setFifth("")
+        setSixth("")
+        setSeven("")
+        setEight("")
+    }
+    const handlethird = ()=>{
+        setOne("")
+        setTwo("")
+        setThird("#e91e63")
+        setFourth("")
+        setFifth("")
+        setSixth("")
+        setSeven("")
+        setEight("")
+    }
+    const handlefourth = ()=>{
+        setOne("")
+        setTwo("")
+        setThird("")
+        setFourth("#ff9800")
+        setFifth("")
+        setSixth("")
+        setSeven("")
+        setEight("")
+    }
+    const handlefifth = ()=>{
+        setOne("")
+        setTwo("")
+        setThird("")
+        setFourth("")
+        setFifth("#cddc39")
+        setSixth("")
+        setSeven("")
+        setEight("")
+    }
+    const handlesixth = ()=>{
+        setOne("")
+        setTwo("")
+        setThird("")
+        setFourth("")
+        setFifth("")
+        setSixth("#4caf50")
+        setSeven("")
+        setEight("")
+    }
+    const handleSeven = ()=>{
+        setOne("")
+        setTwo("")
+        setThird("")
+        setFourth("")
+        setFifth("")
+        setSixth("")
+        setSeven("#0091ea")
+        setEight("")
+    }
+    const handleEight = ()=>{
+        setOne("")
+        setTwo("")
+        setThird("")
+        setFourth("")
+        setFifth("")
+        setSixth("")
+        setSeven("")
+        setEight("#9c27b0")
+    }
+
+    
+
+    const handleSave = () =>{
+        console.log(name,available,selectedValue,spicelevel)
+    }
+
+
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(categoryList())
@@ -35,7 +157,7 @@ const AddItem = () => {
                     <div className="details">
                         <div className="name">
 
-                            <TextField id="standard-basic" className="textfieldname" color="success" style={{ width: "60%" }} label="Name" variant="standard" />
+                            <TextField id="standard-basic" className="textfieldname" color="success" style={{ width: "60%" }} label="Name" variant="standard" value={name} onChange={(e)=>setName(e.target.value)} />
                             <div className="category-textfield">
                                 <Autocomplete
                                     sx={{ width: 350 }}
@@ -51,6 +173,8 @@ const AddItem = () => {
                                             variant="standard"
                                             label="category"
                                             placeholder="category"
+                                            onChange={(e)=>setCatg(e.target.value)}
+                                            value={catg}
                                         />
                                     )}
                                 />
@@ -63,8 +187,8 @@ const AddItem = () => {
                             <Checkbox
 
                                 color="success"
-                                checked={checked}
-                                // onChange={handleChange}
+                                checked={available}
+                                onChange={()=>setAvailable(!available)}
                                 inputProps={{ 'aria-label': 'controlled' }}
                             />
                             <p>The item is available for sale</p>
@@ -74,18 +198,18 @@ const AddItem = () => {
                                 Sold by
                             </p>
                             <Radio
-                                // checked={selectedValue === 'a'}
-                                // onChange={handleChange}
-                                value="a"
+                                checked={selectedValue === 'each'}
+                                onChange={()=>setSelectedValue("each")}
+                                value="each"
                                 name="radio-buttons"
                                 inputProps={{ 'aria-label': 'A' }}
                                 color="success"
                             />
                             <p>Each</p>
                             <Radio
-                                // checked={selectedValue === 'b'}
-                                // onChange={handleChange}
-                                value="b"
+                                checked={selectedValue === 'weight/volume'}
+                                onChange={()=>setSelectedValue("weight/volume")}
+                                value="weight"
                                 name="radio-buttons"
                                 inputProps={{ 'aria-label': 'B' }}
                                 color="success"
@@ -98,7 +222,8 @@ const AddItem = () => {
                                 id="standard-basic"
                                 label="Price"
                                 color="success"
-
+                                value={price}
+                                onChange={(e)=>setPrice(e.target.value)}
                                 helperText="Leave the field blank to indicate the price upon sale."
                                 variant="standard"
                             />
@@ -108,7 +233,8 @@ const AddItem = () => {
                                 label="Cost"
                                 color="success"
                                 defaultValue="0.00"
-
+                                value={cost}
+                                onChange={(e)=>setCost(e.target.value)}
                                 variant="standard"
                             />
 
@@ -121,13 +247,16 @@ const AddItem = () => {
                                 color="success"
                                 defaultValue="10019"
                                 variant="standard"
+                                onChange={(e)=>setsku(e.target.value)}
+                                value={sku}
                             />
                             <TextField
                                 style={{ marginLeft: "20px", width: "50%" }}
                                 id="standard-basic"
                                 label="BarCode"
                                 color="success"
-
+                                onChange={(e)=>setBarcode(e.target.value)}
+                                value={barcode}
                                 variant="standard"
                             />
                         </div>
@@ -165,6 +294,8 @@ const AddItem = () => {
                                         color="success"
                                         defaultValue="0"
                                         variant="standard"
+                                        onChange={(e)=>setInstock(e.target.value)}
+                                        value={instock}
                                     />
 
                                     <TextField
@@ -172,7 +303,8 @@ const AddItem = () => {
                                         id="standard-basic"
                                         label="Low stock"
                                         color="success"
-
+                                        onChange={(e)=>setLowstock(e.target.value)}
+                                        value={instock}
                                         helperText="Item quantity at which you will be notified about low stock."
                                         variant="standard"
                                     />
@@ -196,8 +328,8 @@ const AddItem = () => {
                             <div className="switchStyling">
                                 <Switch
                                     color="success"
-                                    // checked={checked}
-                                    // onChange={handleChange}
+                                    checked={spicelevel}
+                                    onChange={()=>setSpicelevel(!spicelevel)}
                                     inputProps={{ 'aria-label': 'controlled' }}
                                 />
                             </div>
@@ -209,18 +341,18 @@ const AddItem = () => {
                         <Typography style={{ margin: "26px" }} variant="h5">Representation on POS</Typography>
                         <div className="shapes">
                             <Radio
-                                checked={selectedValue === 'a'}
-                                onChange={(e) => setSelectedValue(e.target.value)}
-                                value="a"
+                                checked={selected === 'colors'}
+                                onChange={() => setSelected("colors")}
+                                value="colors"
                                 name="radio-buttons"
                                 inputProps={{ 'aria-label': 'A' }}
                             />
                             <Typography style={{ marginTop: "10px", marginRight: "300px" }}>Color and Shape</Typography>
 
                             <Radio
-                                checked={selectedValue === 'b'}
-                                onChange={(e) => setSelectedValue(e.target.value)}
-                                value="b"
+                                checked={selected=== 'image'}
+                                onChange={() => setSelected("image")}
+                                value="image"
                                 name="radio-buttons"
                                 inputProps={{ 'aria-label': 'B' }}
                             />
@@ -228,31 +360,31 @@ const AddItem = () => {
                             <Typography style={{ marginTop: "10px" }}>Image</Typography>
                         </div>
                         {
-                            selectedValue == 'a' &&
+                            selected == 'colors' &&
                             <div>
                                 <div className="colorshapesStyling">
-                                    <Button className="colorshapes" style={{ backgroundColor: "#f5f5f5", marginTop: "15px", marginRight: "15px" }} onClick={() => setFlag(!flag)} ><DoneIcon sx={{ color: flag ? "#fafafa" : "#f5f5f5" }} /> </Button>
-                                    <Button className="colorshapes" style={{ backgroundColor: "red", marginTop: "15px", marginRight: "15px" }} onClick={() => setFlag(!flag)} ><DoneIcon sx={{ color: flag ? "#fafafa" : "red" }} /> </Button>
-                                    <Button className="colorshapes" style={{ backgroundColor: "#e91e63", marginTop: "15px", marginRight: "15px" }} onClick={() => setFlag(!flag)} ><DoneIcon sx={{ color: flag ? "#fafafa" : "#e91e63" }} /> </Button>
-                                    <Button className="colorshapes" style={{ backgroundColor: "#ff9800", marginTop: "15px", marginRight: "15px" }} onClick={() => setFlag(!flag)} ><DoneIcon sx={{ color: flag ? "#fafafa" : "#ff9800" }} /> </Button>
-                                    <Button className="colorshapes" style={{ backgroundColor: "#cddc39", marginTop: "15px", marginRight: "15px" }} onClick={() => setFlag(!flag)} ><DoneIcon sx={{ color: flag ? "#fafafa" : "#cddc39" }} /> </Button>
+                                    <Button className="colorshapes" style={{ backgroundColor: "#cfcaca", marginTop: "15px", marginRight: "15px" }} onClick={handleOne} ><DoneIcon sx={{ color: one ? "#fafafa" : "#cfcaca" }} /> </Button>
+                                    <Button className="colorshapes" style={{ backgroundColor: "red", marginTop: "15px", marginRight: "15px" }} onClick={handletwo} ><DoneIcon sx={{ color: two ? "#fafafa" : "red" }} /> </Button>
+                                    <Button className="colorshapes" style={{ backgroundColor: "#e91e63", marginTop: "15px", marginRight: "15px" }} onClick={handlethird} ><DoneIcon sx={{ color: third ? "#fafafa" : "#e91e63" }} /> </Button>
+                                    <Button className="colorshapes" style={{ backgroundColor: "#ff9800", marginTop: "15px", marginRight: "15px" }} onClick={handlefourth} ><DoneIcon sx={{ color: fourth ? "#fafafa" : "#ff9800" }} /> </Button>
+                                    <Button className="colorshapes" style={{ backgroundColor: "#cddc39", marginTop: "15px", marginRight: "15px" }} onClick={handlefifth} ><DoneIcon sx={{ color: fifth ? "#fafafa" : "#cddc39" }} /> </Button>
 
-                                    <Button className="colorshapes" style={{ backgroundColor: "#4caf50", marginRight: "15px", marginTop: "15px", marginLeft: "10px" }} onClick={() => setFlag(!flag)} ><DoneIcon sx={{ color: flag ? "#fafafa" : "#4caf50" }} /> </Button>
-                                    <Button className="colorshapes" style={{ backgroundColor: "#0091ea", marginTop: "15px", marginRight: "15px" }} onClick={() => setFlag(!flag)} ><DoneIcon sx={{ color: flag ? "#fafafa" : "#0091ea" }} /> </Button>
-                                    <Button className="colorshapes" style={{ backgroundColor: "#9c27b0", marginTop: "15px", marginRight: "15px" }} onClick={() => setFlag(!flag)} ><DoneIcon sx={{ color: flag ? "#fafafa" : "#9c27b0" }} /> </Button>
+                                    <Button className="colorshapes" style={{ backgroundColor: "#4caf50", marginRight: "15px", marginTop: "15px", marginLeft: "10px" }} onClick={handlesixth} ><DoneIcon sx={{ color: sixth ? "#fafafa" : "#4caf50" }} /> </Button>
+                                    <Button className="colorshapes" style={{ backgroundColor: "#0091ea", marginTop: "15px", marginRight: "15px" }} onClick={handleSeven} ><DoneIcon sx={{ color: seven ? "#fafafa" : "#0091ea" }} /> </Button>
+                                    <Button className="colorshapes" style={{ backgroundColor: "#9c27b0", marginTop: "15px", marginRight: "15px" }} onClick={handleEight} ><DoneIcon sx={{ color: eight ? "#fafafa" : "#9c27b0" }} /> </Button>
 
 
                                 </div>
                                 <div className="shapesStyling">
-                                    <div className="shape" style={{ border: "0.5px solid black" }}></div>
-                                    <div className="shape" style={{ border: "0.5px solid black", borderRadius: "50px" }}></div>
+                                    <div className="shape" style={{ border: "0.5px solid black" }} onClick={handlesquare} ><DoneIcon sx={{ color: square ? "black" : "white" }} /></div>
+                                    <div className="shape" style={{ border: "0.5px solid black", borderRadius: "50px" }} onClick={handleCircle}><DoneIcon sx={{ color: circle ? "black" : "white" }} /></div>
 
                                 </div>
                             </div>
 
                         }
                         {
-                            selectedValue == 'b' &&
+                            selected == 'image' &&
                             <div>
                                 <div>
                                     <div className="image-background">
@@ -282,7 +414,7 @@ const AddItem = () => {
                     <div style={{backgroundColor:"rgba(234, 230, 230, 0.915)"}}>
                        
                         <Button style={{backgroundColor:"white",color:"black",margin:"0px 20px 0px 500px",marginBottom:"20px"}}>CANCEL</Button>
-                        <Button style={{backgroundColor:"rgb(152, 192, 51)",color:"white",marginBottom:"20px"}}>SAVE</Button>
+                        <Button style={{backgroundColor:"rgb(152, 192, 51)",color:"white",marginBottom:"20px"}} onClick={handleSave}>SAVE</Button>
                         
                        
                     </div>

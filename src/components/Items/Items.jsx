@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Autocomplete, Button, Checkbox, Dialog, Menu, Pagination, Stack, TablePagination, TextField } from "@mui/material";
+import { Autocomplete, Button, Checkbox, Dialog, InputLabel, Menu, MenuItem, Pagination, Select, Stack, TablePagination, TextField } from "@mui/material";
 import "./Items.css"
 import { useDispatch, useSelector } from "react-redux"
-import { categoryList } from "../../Actions/login";
+import { ItemsList, categoryList } from "../../Actions/login";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import Table from '@mui/material/Table';
@@ -12,40 +12,48 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 
 const Items = () => {
 
 
 
-    const [page,setPage] = useState("1")
-    const [rowsperpage,setRowsperpage] = useState("10")
+    const [pageNo, setPageNo] = useState(1)
+    const [rowsperpage, setRowsperpage] = useState(5)
 
     const [select, setSelect] = useState([])
     const [open, setOpen] = useState(false)
-
+    
     const dispatch = useDispatch()
+    
     useEffect(() => {
         dispatch(categoryList())
+        dispatch(ItemsList())
+       
     }, [dispatch])
 
     const { category } = useSelector((state) => state.category)
+    const { items } = useSelector((state) => state.items)
+
+    const handleChange = (e)=>{
+        setRowsperpage(e.target.value)
+    }
+
+    // const handlePreviousPage =()=>{
+
+    // }
+
+    // const handleNextPage = ()=>{
+    //     const newpage = pageNo + 1
+    //     setPageNo(newpage)
+    //     dispatch(pageNo,rowsperpage)
+    // }
 
 
-    const rows = [
-        { name: "kavya", category: "22", price: "1", cost: "2", margin: "1", Instock: "1" },
-        { name: "kavya", category: "22", price: "1", cost: "2", margin: "1", Instock: "1" },
-        { name: "kavya", category: "22", price: "1", cost: "2", margin: "1", Instock: "1" },
-        { name: "kavya", category: "22", price: "1", cost: "2", margin: "1", Instock: "1" },
-        { name: "kavya", category: "22", price: "1", cost: "2", margin: "1", Instock: "1" },
-        { name: "kavya", category: "22", price: "1", cost: "2", margin: "1", Instock: "1" },
-        { name: "kavya", category: "22", price: "1", cost: "2", margin: "1", Instock: "1" },
-        { name: "kavya", category: "22", price: "1", cost: "2", margin: "1", Instock: "1" },
-        { name: "kavya", category: "22", price: "1", cost: "2", margin: "1", Instock: "1" },
 
-    ];
+
     return (
 
         <div>
@@ -146,20 +154,20 @@ const Items = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows.map((row) => (
+                                {items && items.map((item) => (
                                     <TableRow
-                                        key={row.name}
+                                        key={item._id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell style={{ padding: "5px" }} ><Checkbox /></TableCell>
                                         <TableCell component="th" scope="row" style={{ padding: "5px" }} >
-                                            {row.name}
+                                            {item.name}
                                         </TableCell>
-                                        <TableCell style={{ padding: "5px" }} align="right">{row.category}</TableCell>
-                                        <TableCell style={{ padding: "5px" }} align="right">{row.price}</TableCell>
-                                        <TableCell style={{ padding: "5px" }} align="right">{row.cost}</TableCell>
-                                        <TableCell style={{ padding: "5px" }} align="right">{row.margin}</TableCell>
-                                        <TableCell style={{ padding: "5px", paddingRight: "16px" }} align="right">{row.Instock}</TableCell>
+                                        <TableCell style={{ padding: "5px" }} align="right">{item.category}</TableCell>
+                                        <TableCell style={{ padding: "5px" }} align="right">{item.price}</TableCell>
+                                        <TableCell style={{ padding: "5px" }} align="right">{item.cost}</TableCell>
+                                        <TableCell style={{ padding: "5px" }} align="right">100%</TableCell>
+                                        <TableCell style={{ padding: "5px", paddingRight: "16px" }} align="right">{item.instock}</TableCell>
 
                                     </TableRow>
                                 ))}
@@ -168,18 +176,40 @@ const Items = () => {
                         </Table>
                     </TableContainer>
                     <hr style={{ borderTop: "0.1px black" }}></hr>
-                    <div >
-                        <TablePagination
-                            component="div"
-                            count={100}
-                             page={page}
-                            // onPageChange={12}
-                            rowsPerPage={rowsperpage}
-                            // onRowsPerPageChange={8}
-                        />
+                    <div  className="pageno" >
+                        
+                            <ArrowBackIosIcon style={{border:"0.5px solid black",padding:"5px"}}/>
+                            <ArrowForwardIosIcon  style={{border:"0.5px solid black",padding:"5px"}}/>
+                            <InputLabel id="demo-simple-select-label"style={{marginLeft:"20px"}} >PageNo:</InputLabel>
+                            <div >
+                                
+
+                            </div>
+
+                        <InputLabel id="demo-simple-select-label" style={{marginLeft:"20px"}}>RowsPerPage:</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={rowsperpage}
+                            size="small"
+                            sx={{fontSize:15,padding:"0px"}}
+                           
+                            label="RowsPerPage"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={10} sx={{padding:0}} >10</MenuItem>
+                            <MenuItem value={25}  sx={{padding:0}}>25</MenuItem>
+                            <MenuItem value={50}  sx={{padding:0}}>50</MenuItem>
+                            <MenuItem value={100}  sx={{padding:0}}>100</MenuItem>
+                        </Select>
+                        
+                        
+                    </div>
+                        
+                        
                     </div>
                 </div>
-            </div>
+            
         </div>
     )
 }
