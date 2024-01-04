@@ -48,7 +48,7 @@ export const ItemsList = () => async(dispatch)=>{
                 "Content-type":"application/json"
             }
         }
-        const {data} = await axios.get("/api/v1/item",config)
+        const {data} = await axios.get("/api/v1/items",config)
         console.log("list from actions",data)
         dispatch({type:"ItemSuccess",payload:data})
 
@@ -66,7 +66,7 @@ export const paginationOfItems = (pageNo,rowsPerPage)=>async(dispatch) =>{
                 "Content-type":"application/json"
             }
         }
-        const {data} = await axios.get(`api/v1/pagination?pageNo=${pageNo}&rowsPerPage=${rowsPerPage}`,config)
+        const {data} = await axios.get(`api/v1/items?pageNo=${pageNo}&rowsPerPage=${rowsPerPage}`,config)
         console.log("list from pagination",data)
         dispatch({type:"ItemSuccess",payload:data})
     }catch(err){

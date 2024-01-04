@@ -20,7 +20,7 @@ const Items = () => {
 
 
 
-    const [pageNo, setPageNo] = useState(1)
+    const [page, setPage] = useState(1)
     const [rowsPerPage, setRowsperpage] = useState(10)
 
     const [select, setSelect] = useState([])
@@ -36,8 +36,7 @@ const Items = () => {
 
     const { category } = useSelector((state) => state.category)
     const { items } = useSelector((state) => state.items)
-
-    var rows = items
+   
 
 
     const handleChange = (e)=>{
@@ -45,25 +44,19 @@ const Items = () => {
     }
 
     const handlePreviousPage =()=>{
-        const newPage = pageNo - 1
-        setPageNo(newPage)
-        if(pageNo && rowsPerPage){
-            dispatch(paginationOfItems(pageNo,rowsPerPage))
-        }
+        const pageNo = page - 1
+         setPage(pageNo)
+        dispatch(paginationOfItems(pageNo,rowsPerPage))
+                    
     }
-
-    const handleNextPage = ()=>{
-        
-        const newPage = pageNo + 1
-        
-        setPageNo(newPage)
-        
-        if(pageNo && rowsPerPage){
-            
-         dispatch(paginationOfItems(pageNo,rowsPerPage))
-        }
-      
+    const handleNextPage =()=>{
+        const pageNo = page  + 1
+         setPage(pageNo)
+        dispatch(paginationOfItems(pageNo,rowsPerPage))
+                    
     }
+    
+    
 
 
 
@@ -168,20 +161,20 @@ const Items = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows && rows.map((row) => (
+                                {items && items.map((item) => (
                                     <TableRow
-                                        key={row._id}
+                                        key={item._id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell style={{ padding: "5px" }} ><Checkbox /></TableCell>
                                         <TableCell component="th" scope="row" style={{ padding: "5px" }} >
-                                            {row.name}
+                                            {item.name}
                                         </TableCell>
-                                        <TableCell style={{ padding: "5px" }} align="right">{row.category}</TableCell>
-                                        <TableCell style={{ padding: "5px" }} align="right">{row.price}</TableCell>
-                                        <TableCell style={{ padding: "5px" }} align="right">{row.cost}</TableCell>
+                                        <TableCell style={{ padding: "5px" }} align="right">{item.category}</TableCell>
+                                        <TableCell style={{ padding: "5px" }} align="right">{item.price}</TableCell>
+                                        <TableCell style={{ padding: "5px" }} align="right">{item.cost}</TableCell>
                                         <TableCell style={{ padding: "5px" }} align="right">100%</TableCell>
-                                        <TableCell style={{ padding: "5px", paddingRight: "16px" }} align="right">{row.instock}</TableCell>
+                                        <TableCell style={{ padding: "5px", paddingRight: "16px" }} align="right">{item.instock}</TableCell>
 
                                     </TableRow>
                                 ))}
