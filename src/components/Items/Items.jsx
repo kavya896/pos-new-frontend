@@ -44,9 +44,12 @@ const Items = () => {
     }
 
     const handlePreviousPage =()=>{
-        const pageNo = page - 1
-         setPage(pageNo)
-        dispatch(paginationOfItems(pageNo,rowsPerPage))
+        if(page > 1){
+            const pageNo = page - 1
+            setPage(pageNo)
+           dispatch(paginationOfItems(pageNo,rowsPerPage))
+        }
+       
                     
     }
     const handleNextPage =()=>{
