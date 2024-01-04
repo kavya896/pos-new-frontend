@@ -3,19 +3,19 @@ const initialState = {
    
 }
 
- const PaginationReducer = createReducer(initialState,{
-    PaginationRequest:(state)=>{
+ const StockReducer = createReducer(initialState,{
+    StockRequest:(state)=>{
         state.loading = true
         state.isAuthenticated = false
     },
-    PaginationSuccess:(state,action)=>{
+    StockSuccess:(state,action)=>{
         state.loading = false
-        state.items= action.payload
+        state.stocks= action.payload
         state.isAuthenticated = true
     },
-    PaginationFail:(state,action)=>{
+    StockFail:(state,action)=>{
         state.loading = false
-        state.items = action.payload
+        state.stocks = action.payload
         state.isAuthenticated = false
     }
    
@@ -24,4 +24,4 @@ const initialState = {
 
 
 
-export default PaginationReducer
+export default StockReducer

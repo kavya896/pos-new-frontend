@@ -32,11 +32,27 @@ export const categoryList = () => async(dispatch)=>{
             }
         }
         const {data} = await axios.get("/api/v1/category")
-        console.log("list from actions",data)
+        
         dispatch({type:"CategorySuccess",payload:data})
 
     }catch(err){
         dispatch({type:"categoryFail",payload:err})
+        console.log(err)
+    }
+}
+export const StockList = () => async(dispatch)=>{
+    try{
+        const config={
+            headers:{
+                "Content-type":"application/json"
+            }
+        }
+        const {data} = await axios.get("/api/v1/stocks")
+        console.log("list from actions",data)
+        dispatch({type:"StockSuccess",payload:data})
+
+    }catch(err){
+        dispatch({type:"StockFail",payload:err})
         console.log(err)
     }
 }
@@ -58,15 +74,18 @@ export const ItemsList = () => async(dispatch)=>{
     }
 }
 
-export const paginationOfItems = (pageNo,rowsPerPage)=>async(dispatch) =>{
+export const paginationOfItems = (pageNo,rowsPerPage,selectcatg,select,search)=>async(dispatch) =>{
     try{
-        console.log(pageNo,rowsPerPage)
+       
+        const stocks = select
+        const category = selectcatg
+        console.log(pageNo,rowsPerPage,category,stocks)
         const config={
             headers:{
                 "Content-type":"application/json"
             }
         }
-        const {data} = await axios.get(`api/v1/items?pageNo=${pageNo}&rowsPerPage=${rowsPerPage}`,config)
+        const {data} = await axios.get(`api/v1/items?pageNo=${pageNo}&rowsPerPage=${rowsPerPage}&category=${category}&stocks=${stocks}&search=${search}`,config)
         console.log("list from pagination",data)
         dispatch({type:"ItemSuccess",payload:data})
     }catch(err){

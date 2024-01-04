@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Autocomplete, Button, Checkbox, Dialog, InputLabel, Menu, MenuItem, Pagination, Select, Stack, TablePagination, TextField } from "@mui/material";
 import "./Items.css"
 import { useDispatch, useSelector } from "react-redux"
-import { ItemsList, categoryList,paginationOfItems } from "../../Actions/login";
+import { ItemsList, StockList, categoryList, paginationOfItems } from "../../Actions/login";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import Table from '@mui/material/Table';
@@ -22,44 +22,64 @@ const Items = () => {
 
     const [page, setPage] = useState(1)
     const [rowsPerPage, setRowsperpage] = useState(10)
-
-    const [select, setSelect] = useState([])
+    const [search, setSearch] = useState("")
+    const [select, setSelect] = useState("")
+    const [selectcatg, setSelectcatg] = useState("")
     const [open, setOpen] = useState(false)
-    
+
     const dispatch = useDispatch()
-    
+
     useEffect(() => {
         dispatch(categoryList())
         dispatch(ItemsList())
-       
+        dispatch(StockList())
+        console.log(search)
     }, [dispatch])
+
+    useEffect(()=>{
+        console.log(search)
+        dispatch(paginationOfItems(page, rowsPerPage, selectcatg, select,search))
+    },[search])
 
     const { category } = useSelector((state) => state.category)
     const { items } = useSelector((state) => state.items)
-   
+    const { stocks } = useSelector((state) => state.stocks)
 
 
-    const handleChange = (e)=>{
+
+    const handleChange = (e) => {
         setRowsperpage(e.target.value)
     }
 
-    const handlePreviousPage =()=>{
-        if(page > 1){
+    const handlePreviousPage = () => {
+        if (page > 1) {
             const pageNo = page - 1
             setPage(pageNo)
-           dispatch(paginationOfItems(pageNo,rowsPerPage))
+            dispatch(paginationOfItems(pageNo, rowsPerPage, selectcatg, select,search))
         }
-       
-                    
+
+
     }
-    const handleNextPage =()=>{
-        const pageNo = page  + 1
-         setPage(pageNo)
-        dispatch(paginationOfItems(pageNo,rowsPerPage))
-                    
+    const handleNextPage = () => {
+        const pageNo = page + 1
+        setPage(pageNo)
+
+        dispatch(paginationOfItems(pageNo, rowsPerPage, selectcatg, select,search))
+
     }
-    
-    
+    const handleCategory = (event, value) => {
+        setSelectcatg(value.name)
+        if (value.name != "") {
+
+            dispatch(paginationOfItems(page, rowsPerPage, value.name, select,search))
+        }
+    }
+    const handleStocks = (event, value) => {
+        setSelect(value.name)
+
+        dispatch(paginationOfItems(page, rowsPerPage, selectcatg, value.name,search))
+    }
+   
 
 
 
@@ -84,9 +104,11 @@ const Items = () => {
                                 sx={{ width: 200 }}
                                 id="size-small-standard"
                                 size="small"
+                                disableClearable
                                 options={category}
                                 getOptionLabel={(option) => option.name}
-
+                                onChange={handleCategory}
+                
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
@@ -97,20 +119,23 @@ const Items = () => {
                                 )}
                             />
 
+
                             <Autocomplete
                                 sx={{ width: 200 }}
                                 style={{ marginLeft: "20px" }}
                                 id="size-small-standard"
                                 size="small"
-                                options={category}
+                                disableClearable
+                                options={stocks}
                                 getOptionLabel={(option) => option.name}
-                                onChange={(event, value) => setSelect(value)}
+                                onChange={handleStocks}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
                                         variant="standard"
                                         label="stock"
                                         placeholder="category"
+
 
                                     />
                                 )}
@@ -120,15 +145,15 @@ const Items = () => {
                             </div>
                             <div >
                                 <Menu open={open} onClose={() => setOpen(false)} style={{ marginTop: "-560px", marginLeft: "750px" }} >
-                                    <Autocomplete
+                                    {/* <Autocomplete
 
                                         sx={{ width: 420 }}
                                         style={{ marginLeft: "20px" }}
                                         id="size-small-standard"
                                         size="small"
-                                        options={category}
-                                        getOptionLabel={(option) => option.name}
-                                        onChange={(event, value) => setSelect(value)}
+                                        
+                                        onChange={handleSearch}
+
                                         renderInput={(params) => (
                                             <TextField
                                                 {...params}
@@ -138,6 +163,17 @@ const Items = () => {
                                                 open
                                             />
                                         )}
+                                    /> */}
+                                    <TextField
+                                        sx={{ width: 420 ,padding:0}}
+                                        style={{ marginLeft: "25px" }}
+                                        color="success"
+                                        id="standard-search"
+                                        label="Search field"
+                                        type="search"
+                                        variant="standard"
+                                        value={search}
+                                        onChange={(e)=>setSearch(e.target.value)}
                                     />
                                 </Menu>
 
@@ -186,40 +222,40 @@ const Items = () => {
                         </Table>
                     </TableContainer>
                     <hr style={{ borderTop: "0.1px black" }}></hr>
-                    <div  className="pageno" >
-                        
-                            <ArrowBackIosIcon onClick ={handlePreviousPage} style={{border:"0.5px solid black",padding:"5px"}}/>
-                            <ArrowForwardIosIcon onClick={handleNextPage}  style={{border:"0.5px solid black",padding:"5px"}}/>
-                            <InputLabel id="demo-simple-select-label"style={{marginLeft:"20px"}} >PageNo:</InputLabel>
-                            <div >
-                                
+                    <div className="pageno" >
 
-                            </div>
+                        <Button disabled={page <= 1 ? true : false} onClick={handlePreviousPage} ><ArrowBackIosIcon style={{ border: "0.5px solid black", padding: "5px" }} /></Button>
+                        <Button onClick={handleNextPage} ><ArrowForwardIosIcon style={{ border: "0.5px solid black", padding: "5px" }} /></Button>
+                        <InputLabel id="demo-simple-select-label" style={{ marginLeft: "20px" }} >PageNo:</InputLabel>
+                        <div >
 
-                        <InputLabel id="demo-simple-select-label" style={{marginLeft:"20px"}}>RowsPerPage:</InputLabel>
+
+                        </div>
+
+                        <InputLabel id="demo-simple-select-label" style={{ marginLeft: "20px" }}>RowsPerPage:</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={rowsPerPage}
                             size="small"
-                            sx={{fontSize:15,padding:"0px"}}
-                           
+                            sx={{ fontSize: 15, padding: "0px" }}
+
                             label="RowsPerPage"
                             onChange={handleChange}
                         >
-                            <MenuItem value={10} sx={{padding:0}} >10</MenuItem>
-                            <MenuItem value={25}  sx={{padding:0}}>25</MenuItem>
-                            <MenuItem value={50}  sx={{padding:0}}>50</MenuItem>
-                            <MenuItem value={100}  sx={{padding:0}}>100</MenuItem>
+                            <MenuItem value={10} sx={{ padding: 0 }} >10</MenuItem>
+                            <MenuItem value={25} sx={{ padding: 0 }}>25</MenuItem>
+                            <MenuItem value={50} sx={{ padding: 0 }}>50</MenuItem>
+                            <MenuItem value={100} sx={{ padding: 0 }}>100</MenuItem>
                         </Select>
-                        
-                        
+
+
                     </div>
-                        
-                        
-                    </div>
+
+
                 </div>
-            
+            </div>
+
         </div>
     )
 }
