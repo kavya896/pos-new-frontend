@@ -3,13 +3,16 @@ import "./AddItem.css"
 import { Accordion, AccordionDetails, AccordionSummary, Autocomplete, Box, Button, Checkbox, Dialog, FormControlLabel, FormGroup, Menu, MenuItem, MenuPaper, Paper, Radio, SvgIcon, Switch, TextField, Typography, colors } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux"
-import { categoryList } from "../../Actions/login";
+import { categoryList, createItems } from "../../Actions/login";
 import ToggleOffOutlinedIcon from '@mui/icons-material/ToggleOffOutlined';
 import DoneIcon from '@mui/icons-material/Done';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+import CloseIcon from '@mui/icons-material/Close';
+import {useNavigate} from "react-router-dom"
 
 
 const AddItem = () => {
+    const navigate = useNavigate()
     const [checked, setChecked] = useState()
 
     
@@ -41,6 +44,7 @@ const AddItem = () => {
     const [sixth,setSixth] = useState()
     const [seven,setSeven] = useState()
     const [eight,setEight] = useState()
+    const [colors,setColors] = useState()
     const [square,setSquare] = useState("black")
     const [circle,setCircle] = useState()
 
@@ -55,6 +59,7 @@ const AddItem = () => {
 
     const handleOne = ()=>{
         setOne("#cfcaca")
+        setColors("#cfcaca")
         setTwo("")
         setThird("")
         setFourth("")
@@ -137,21 +142,36 @@ const AddItem = () => {
     
 
     const handleSave = () =>{
-        console.log(name,available,selectedValue,spicelevel)
+        dispatch(createItems(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors))
+        console.log(catg)
     }
 
+    const {createItem,createItemFail} = useSelector((state)=>state.createItem)
 
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(categoryList())
-    }, [dispatch])
+        if(createItemFail){
+            alert("Item Already exists")
+        }
+        if(createItem){
+            navigate("/itemsList")
+        }
 
+    }, [dispatch,createItemFail,createItem])
+
+    
+   
+
+   
 
 
     const { category } = useSelector((state) => state.category)
     return (
         <div>
+
             <div className="title">Create Item</div>
+
             <div className="createitemspage">
                 <div className="createitemspage-setup">
                     <div className="details">
@@ -166,6 +186,7 @@ const AddItem = () => {
                                     options={category}
                                     getOptionLabel={(option) => option.name}
                                     color="success"
+                                    onChange={(event,value)=>setCatg(value.name)}
                                     renderInput={(params) => (
                                         <TextField
                                             {...params}
@@ -173,15 +194,15 @@ const AddItem = () => {
                                             variant="standard"
                                             label="category"
                                             placeholder="category"
-                                            onChange={(e)=>setCatg(e.target.value)}
-                                            value={catg}
+                                            
+                                            
                                         />
                                     )}
                                 />
                             </div>
                         </div>
                         <div className="description">
-                            <TextField id="outlined-basic" color="success" style={{ width: "100%" }} label="Description" variant="outlined" />
+                            <TextField id="outlined-basic" color="success" style={{ width: "100%" }} label="Description" value={description} onChange={(e)=>setdescription(e.target.value)} variant="outlined" />
                         </div>
                         <div className="item-checkbox">
                             <Checkbox

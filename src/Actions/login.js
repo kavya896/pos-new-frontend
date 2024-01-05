@@ -112,3 +112,20 @@ export const loginUsingPin = (pin) =>async(dispatch) =>{
         console.log(err)
     }
 }
+
+export const createItems =(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors)=> async(dispatch)=>{
+    try{
+        console.log(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors)
+        const config = {
+            headers:{
+                "Content-type":"application/json"
+            }
+        }
+        const {data} = await axios.post("/api/v1/items",{name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors},config)
+        dispatch({type:"CreateItemSuccess",payload:data})
+        console.log(data)
+    }catch(err){
+        dispatch({type:"CreateItemFail",payload:err.response.data.message})
+        console.log(err.response.data.message)
+    }
+}
