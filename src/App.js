@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage/HomePage";
 import Items from "./components/Items/Items";
 import AddItem from "./components/AddItem/AddItem";
 import Category from "./components/Categories/Categories";
+import UpdateItem from "./components/UpdateItem/UpdateItem";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/addItems" element={<AddItem/>} ></Route>
         <Route path="/itemsList" element={<Items/>}></Route>
         <Route path="/category" element={<Category/>}></Route>
+        <Route path="/updateItem/:id" element={<UpdateItem/>} ></Route>
       </Routes>
     </Router>
   

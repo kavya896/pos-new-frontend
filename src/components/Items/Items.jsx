@@ -14,12 +14,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useNavigate } from "react-router-dom";
 
 
 const Items = () => {
 
 
-
+    const navigate = useNavigate()
     const [page, setPage] = useState(1)
     const [rowsPerPage, setRowsperpage] = useState(10)
     const [search, setSearch] = useState("")
@@ -33,7 +34,7 @@ const Items = () => {
         dispatch(categoryList())
         dispatch(ItemsList())
         dispatch(StockList())
-        console.log(search)
+        
     }, [dispatch])
 
     useEffect(()=>{
@@ -44,9 +45,9 @@ const Items = () => {
     const { category } = useSelector((state) => state.category)
     const { items } = useSelector((state) => state.items)
     const { stocks } = useSelector((state) => state.stocks)
-
-
-
+    
+   
+    
     const handleChange = (e) => {
         setRowsperpage(e.target.value)
     }
@@ -80,7 +81,7 @@ const Items = () => {
         dispatch(paginationOfItems(page, rowsPerPage, selectcatg, value.name,search))
     }
    
-
+    
 
 
 
@@ -204,6 +205,7 @@ const Items = () => {
                                     <TableRow
                                         key={item._id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        onClick={()=>navigate(`/updateItem/${item._id}`)}
                                     >
                                         <TableCell style={{ padding: "5px" }} ><Checkbox /></TableCell>
                                         <TableCell component="th" scope="row" style={{ padding: "5px" }} >
@@ -213,7 +215,7 @@ const Items = () => {
                                         <TableCell style={{ padding: "5px" }} align="right">{item.price}</TableCell>
                                         <TableCell style={{ padding: "5px" }} align="right">{item.cost}</TableCell>
                                         <TableCell style={{ padding: "5px" }} align="right">100%</TableCell>
-                                        <TableCell style={{ padding: "5px", paddingRight: "16px" }} align="right">{item.instock}</TableCell>
+                                        <TableCell style={{ padding: "5px", paddingRight: "16px" }} align="right">{item.inStock}</TableCell>
 
                                     </TableRow>
                                 ))}
