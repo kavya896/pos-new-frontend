@@ -161,12 +161,13 @@ const AddItem = () => {
     }, [dispatch,createItemFail,createItem])
 
     
-   
-
-   
-
-
     const { category } = useSelector((state) => state.category)
+   
+    
+
+   
+
+
     return (
         <div>
 
@@ -179,7 +180,7 @@ const AddItem = () => {
 
                             <TextField id="standard-basic" className="textfieldname" color="success" style={{ width: "60%" }} label="Name" variant="standard" value={name} onChange={(e)=>setName(e.target.value)} />
                             <div className="category-textfield">
-                                <Autocomplete
+                            <Autocomplete
                                     sx={{ width: 350 }}
                                     id="size-small-standard"
                                     size="small"

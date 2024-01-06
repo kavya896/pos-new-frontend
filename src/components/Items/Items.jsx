@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Autocomplete, Button, Checkbox, Dialog, InputLabel, Menu, MenuItem, Pagination, Select, Stack, TablePagination, TextField } from "@mui/material";
 import "./Items.css"
 import { useDispatch, useSelector } from "react-redux"
-import { ItemsList, StockList, categoryList, paginationOfItems } from "../../Actions/login";
+import { ItemsList, StockList, categoryList, getItemById, paginationOfItems } from "../../Actions/login";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import Table from '@mui/material/Table';
@@ -27,6 +27,7 @@ const Items = () => {
     const [select, setSelect] = useState("")
     const [selectcatg, setSelectcatg] = useState("")
     const [open, setOpen] = useState(false)
+    const [itemId,setItemId] = useState()
 
     const dispatch = useDispatch()
 
@@ -34,7 +35,10 @@ const Items = () => {
         dispatch(categoryList())
         dispatch(ItemsList())
         dispatch(StockList())
-        
+        const updateItem = {}
+        const getCategory = {}
+        localStorage.setItem("updateItem",JSON.stringify(updateItem))
+        localStorage.setItem("getCategory",JSON.stringify(getCategory))
     }, [dispatch])
 
     useEffect(()=>{
@@ -80,10 +84,8 @@ const Items = () => {
 
         dispatch(paginationOfItems(page, rowsPerPage, selectcatg, value.name,search))
     }
+    // const refresh =localStorage.setItem("refresh",JSON.stringify({"refresh":true}))
    
-    
-
-
 
     return (
 
@@ -206,6 +208,9 @@ const Items = () => {
                                         key={item._id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                         onClick={()=>navigate(`/updateItem/${item._id}`)}
+                                       
+                                        
+                                       
                                     >
                                         <TableCell style={{ padding: "5px" }} ><Checkbox /></TableCell>
                                         <TableCell component="th" scope="row" style={{ padding: "5px" }} >

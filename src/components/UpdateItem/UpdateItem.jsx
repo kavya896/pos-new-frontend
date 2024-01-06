@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Accordion, AccordionDetails, AccordionSummary, Autocomplete, Box, Button, Checkbox, Dialog, FormControlLabel, FormGroup, Menu, MenuItem, MenuPaper, Paper, Radio, SvgIcon, Switch, TextField, Typography, colors } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux"
-import { categoryList, createItems } from "../../Actions/login";
+import { categoryList, createItems, getCategoryByName, getItemById, updateItems } from "../../Actions/login";
 import ToggleOffOutlinedIcon from '@mui/icons-material/ToggleOffOutlined';
 import DoneIcon from '@mui/icons-material/Done';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
@@ -12,20 +12,12 @@ import {useNavigate} from "react-router-dom"
 import { useParams } from "react-router-dom";
 
 const UpdateItem = () => {
-    const navigate = useNavigate()
-    const id = useParams()
-    console.log("id from updates",id)
-    const [checked, setChecked] = useState()
-
     
-    const [flag, setFlag] = useState(false)
-    // const handleChange = (e)=>{}
-    const handleFlag = (e) => {
-        setFlag(!flag)
-    }
+    const navigate = useNavigate()
     
     const [name,setName] = useState()
     const [catg,setCatg] = useState()
+    const [placecatg, setPlaceCatg] = useState({})
     const [description,setdescription] = useState()
     const [price,setPrice] = useState()
     const [cost,setCost] =useState()
@@ -145,50 +137,91 @@ const UpdateItem = () => {
 
     const handleSave = () =>{
         dispatch(createItems(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors))
-        console.log(catg)
+        
     }
+    const idkey = useParams()
+    const { category } = useSelector((state) => state.category)
+    const { getItems } = useSelector((state)=>state.getItems)
+    // const { byNames } = useSelector((state)=>state.byNames)
+    // console.log(byNames,"bynames")
 
-    const {createItem,createItemFail} = useSelector((state)=>state.createItem)
-
+    
+    
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(categoryList())
-        if(createItemFail){
-            alert("Item Already exists")
-        }
-        if(createItem){
-            navigate("/itemsList")
-        }
+       
+        
+        dispatch(updateItems(idkey.id))
+        dispatch(getItemById(idkey.id))
+        
+        const getCategory = JSON.parse(localStorage.getItem("getCategory"))
+        const updateItem = JSON.parse(localStorage.getItem("updateItem"))
+        dispatch(getCategoryByName(updateItem.category))
+        setName( updateItem.name)
+        setPlaceCatg(getCategory)
+        setdescription(updateItem.description)
+        setPrice(updateItem.price)
+        setCost(updateItem.cost)
+        setsku(updateItem.SKU)
+        setBarcode(updateItem.barcode)
+        setInstock(updateItem.inStock)
+        setLowstock(updateItem.lowstock)
+        setSpicelevel(updateItem.spiceLevel)
+        setAvailable(updateItem.available)
+        setSelectedValue(updateItem.soldBy)
+        
+           
+        
+        
+        
+        
+       
+       
+    }, [dispatch])
 
-    }, [dispatch,createItemFail,createItem])
-
+    
+    
     
    
 
+
+
+
+
    
+    
 
-
-    const { category } = useSelector((state) => state.category)
+    
+    
     return (
         <div>
-
+           
             <div className="title">Create Item</div>
 
             <div className="createitemspage">
                 <div className="createitemspage-setup">
                     <div className="details">
                         <div className="name">
-
-                            <TextField id="standard-basic" className="textfieldname" color="success" style={{ width: "60%" }} label="Name" variant="standard" value={name} onChange={(e)=>setName(e.target.value)} />
+                            
+                            <TextField id="standard-basic" className="textfieldname" color="success" style={{ width: "60%" }} label="Name" defaultValue={"name"} variant="standard" value={name} onChange={(e)=>setName(e.target.value)} />
                             <div className="category-textfield">
+                                
                                 <Autocomplete
+                                   
+                                  
                                     sx={{ width: 350 }}
-                                    id="size-small-standard"
+                                    id="controllable-states-demo"
                                     size="small"
+                                    
                                     options={category}
-                                    getOptionLabel={(option) => option.name}
+                                    getOptionLabel={(option) =>option.name}
+                                    freeSolo
+                                    disableClearable
+                                    
                                     color="success"
                                     onChange={(event,value)=>setCatg(value.name)}
+                                    value={placecatg}
                                     renderInput={(params) => (
                                         <TextField
                                             {...params}
@@ -197,9 +230,10 @@ const UpdateItem = () => {
                                             label="category"
                                             placeholder="category"
                                             
-                                            
                                         />
+                                        
                                     )}
+                                    
                                 />
                             </div>
                         </div>
@@ -244,6 +278,7 @@ const UpdateItem = () => {
 
                                 id="standard-basic"
                                 label="Price"
+                                defaultValue={"$0.00"}
                                 color="success"
                                 value={price}
                                 onChange={(e)=>setPrice(e.target.value)}
@@ -278,6 +313,7 @@ const UpdateItem = () => {
                                 id="standard-basic"
                                 label="BarCode"
                                 color="success"
+                                defaultValue={"Barcode"}
                                 onChange={(e)=>setBarcode(e.target.value)}
                                 value={barcode}
                                 variant="standard"

@@ -129,3 +129,59 @@ export const createItems =(name,catg,description,price,cost,sku,barcode,instock,
         console.log(err.response.data.message)
     }
 }
+
+export const updateItems = (id) =>async(dispatch)=>{
+    try{
+        
+        console.log(id)
+        const config = {
+            headers:{
+                "Content-type":"application/json"
+            }
+        }
+        const {data} = await axios.post(`/api/v1/updateItem/${id}`,config)
+        console.log(data)
+        
+    }catch(err){
+        console.log(err)
+    }
+}
+export const getItemById = (id) =>async(dispatch)=>{
+    try{
+       
+        
+        const config = {
+            headers:{
+                "Content-type":"application/json"
+            }
+        }
+        const {data} = await axios.get(`/api/v1/getItemById/${id}`,config)
+        if(data){
+            
+            localStorage.setItem("updateItem",JSON.stringify(data))
+            dispatch({type:"GetItemSuccess",payload:data})
+            
+        }
+       
+       
+        
+    }catch(err){
+        dispatch({type:"GetItemFail",payload:err})
+        console.log(err)
+    }
+}
+export const getCategoryByName =(name)=> async(dispatch) =>{
+    try{
+        const config = {
+            headers:{
+                "Content-type":"application/json"
+            }
+        }
+        const {data} = await axios.get(`/api/v1/getCategoryByName/${name}`,config)
+        localStorage.setItem("getCategory",JSON.stringify(data[0]))
+        dispatch({type:"CategoryNameSuccess",payload:data})
+
+    }catch(err){
+        console.log(err)
+    }
+}
