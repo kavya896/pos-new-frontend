@@ -36,6 +36,8 @@ const AddItem = () => {
     const [available,setAvailable] = useState(true)
     const [selected, setSelected] = useState('colors')
 
+    const [filename,setFilename] = useState()
+    const [imageFile,setImageFile] = useState()
     const [one,setOne] = useState("#cfcaca")
     const [two,setTwo] = useState()
     const [third,setThird] = useState()
@@ -142,7 +144,7 @@ const AddItem = () => {
     
 
     const handleSave = () =>{
-        dispatch(createItems(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors))
+        dispatch(createItems(name,catg,imageFile,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors))
         console.log(catg)
     }
 
@@ -163,6 +165,35 @@ const AddItem = () => {
     
     const { category } = useSelector((state) => state.category)
    
+    const handleFile =(e)=>{
+        const selectedFile = e.target.files[0]
+        
+        convertToBase64(selectedFile)
+        
+    }
+
+
+    const convertToBase64 = (selectedFile) => {
+        const reader = new FileReader()
+    
+        reader.readAsDataURL(selectedFile)
+    
+        reader.onload = () => {
+          console.log('called: ', reader)
+          setImageFile(reader.result)
+          console.log(reader.result)
+        }
+      }
+    // const setFiletoBase = (file) =>{
+    //     var Img
+    //     const reader = new FileReader()
+    //     reader.readAsDataURL(file)
+    //     reader.onloadend = () =>{
+    //         setImageFile(reader.result)
+    //         console.log(reader.result)
+    //     }
+    
+    // }
     
 
    
@@ -414,19 +445,22 @@ const AddItem = () => {
   
                                     </div>
                                     <input
-                                        accept="image/*"
+                                        // accept="image/*"
                                         // className={classes.input}
                                         style={{ display: 'none' }}
                                         id="raised-button-file"
-                                        multiple
+                                        // multiple
                                         type="file"
+                                        
+                                        onChange={handleFile}
                                     />
                                     <label htmlFor="raised-button-file">
                                         <Button variant="raised" component="span" style={{marginLeft:"297px",marginTop:"-54px",backgroundColor:"green",width:"126px",color:"white"}} >
                                             Upload
                                         </Button>
-  
+                                    
                                     </label>
+                                    {imageFile?<div style={{textAlign:"center"}}>File Selected</div>:""}
                                 </div>
                             </div>
                         }
