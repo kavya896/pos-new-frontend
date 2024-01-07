@@ -10,12 +10,12 @@ const initialState = {
     },
     UpdateItemSuccess:(state,action)=>{
         state.loading = false
-        state.updateItems= action.payload
+        state.updates= action.payload
         state.isAuthenticated = true
     },
     UpdateItemFail:(state,action)=>{
         state.loading = false
-        state.updateItems = action.payload
+        state.updates = action.payload
         state.isAuthenticated = false
     }
    

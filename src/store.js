@@ -15,7 +15,7 @@ const store = configureStore({
         items : ItemReducer,
         stocks :StockReducer,
         createItem :CreateItemReducer,
-        updateItems : UpdateItemReducer,
+        updates : UpdateItemReducer,
         getItems : GetItemReducer,
         byNames : categoryNameReducer
        

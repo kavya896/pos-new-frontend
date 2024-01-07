@@ -135,15 +135,10 @@ const UpdateItem = () => {
 
     
 
-    const handleSave = () =>{
-        dispatch(createItems(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors))
-        
-    }
+  
     const idkey = useParams()
     const { category } = useSelector((state) => state.category)
-    const { getItems } = useSelector((state)=>state.getItems)
-    // const { byNames } = useSelector((state)=>state.byNames)
-    // console.log(byNames,"bynames")
+   
 
     
     
@@ -152,12 +147,12 @@ const UpdateItem = () => {
         dispatch(categoryList())
        
         
-        dispatch(updateItems(idkey.id))
+        // dispatch(updateItems(idkey.id))
         dispatch(getItemById(idkey.id))
         
         const getCategory = JSON.parse(localStorage.getItem("getCategory"))
         const updateItem = JSON.parse(localStorage.getItem("updateItem"))
-        dispatch(getCategoryByName(updateItem.category))
+         
         setName( updateItem.name)
         setPlaceCatg(getCategory)
         setdescription(updateItem.description)
@@ -180,12 +175,18 @@ const UpdateItem = () => {
        
     }, [dispatch])
 
-    
+    const handleSave = () =>{
+        var id = idkey.id
+        dispatch(updateItems(id,name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors))
+        navigate("/itemsList")
+    }
     
     
    
-
-
+    
+   
+   
+  
 
 
 

@@ -130,16 +130,17 @@ export const createItems =(name,catg,imageFile,description,price,cost,sku,barcod
     }
 }
 
-export const updateItems = (id) =>async(dispatch)=>{
+export const updateItems =(id,name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors)=>async(dispatch)=>{
     try{
-        
-        console.log(id)
+        console.log("actions from updatet")
+       
         const config = {
             headers:{
                 "Content-type":"application/json"
             }
         }
-        const {data} = await axios.post(`/api/v1/updateItem/${id}`,config)
+        const {data} = await axios.post(`/api/v1/updateItem/${id}`,{name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors},config)
+        dispatch({type:"UpdateItemSuccess",payload:data})
         console.log(data)
         
     }catch(err){
@@ -158,8 +159,10 @@ export const getItemById = (id) =>async(dispatch)=>{
         const {data} = await axios.get(`/api/v1/getItemById/${id}`,config)
         if(data){
             
-            localStorage.setItem("updateItem",JSON.stringify(data))
-            dispatch({type:"GetItemSuccess",payload:data})
+            localStorage.setItem("updateItem",JSON.stringify(data.item))
+            // dispatch({type:"GetItemSuccess",payload:data[0].item})
+            localStorage.setItem("getCategory",JSON.stringify(data.category))
+            // dispatch({type:"CategoryNameSuccess",payload:data})
             
         }
        
