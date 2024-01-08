@@ -3,7 +3,7 @@ import "./AddItem.css"
 import { Accordion, AccordionDetails, AccordionSummary, Autocomplete, Box, Button, Checkbox, Dialog, FormControlLabel, FormGroup, Menu, MenuItem, MenuPaper, Paper, Radio, SvgIcon, Switch, TextField, Typography, colors } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux"
-import { categoryList, createItems } from "../../Actions/login";
+import { categoryList, createItems, uploadImage } from "../../Actions/login";
 import ToggleOffOutlinedIcon from '@mui/icons-material/ToggleOffOutlined';
 import DoneIcon from '@mui/icons-material/Done';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
@@ -37,7 +37,7 @@ const AddItem = () => {
     const [selected, setSelected] = useState('colors')
 
     const [filename,setFilename] = useState()
-    const [imageFile,setImageFile] = useState()
+    // const [img,setImg] = useState()
     const [one,setOne] = useState("#cfcaca")
     const [two,setTwo] = useState()
     const [third,setThird] = useState()
@@ -142,10 +142,14 @@ const AddItem = () => {
     }
 
     
+    
+
+    
 
     const handleSave = () =>{
-        dispatch(createItems(name,catg,imageFile,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors))
-        console.log(catg)
+
+        dispatch(createItems(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors))
+       
     }
 
     const {createItem,createItemFail} = useSelector((state)=>state.createItem)
@@ -164,36 +168,24 @@ const AddItem = () => {
 
     
     const { category } = useSelector((state) => state.category)
+
    
-    const handleFile =(e)=>{
-        const selectedFile = e.target.files[0]
+
+      const handleFile = async (e)=>{
         
-        convertToBase64(selectedFile)
-        
+
+        const image= e.target.files[0]
+        console.log(image)
+        var formdata = new FormData();
+        formdata.append("image", image);
+        console.log(formdata.get("image"))
+
+
+        dispatch(uploadImage(formdata.get("image")))
     }
 
 
-    const convertToBase64 = (selectedFile) => {
-        const reader = new FileReader()
     
-        reader.readAsDataURL(selectedFile)
-    
-        reader.onload = () => {
-          console.log('called: ', reader)
-          setImageFile(reader.result)
-          console.log(reader.result)
-        }
-      }
-    // const setFiletoBase = (file) =>{
-    //     var Img
-    //     const reader = new FileReader()
-    //     reader.readAsDataURL(file)
-    //     reader.onloadend = () =>{
-    //         setImageFile(reader.result)
-    //         console.log(reader.result)
-    //     }
-    
-    // }
     
 
    
@@ -450,6 +442,7 @@ const AddItem = () => {
                                         style={{ display: 'none' }}
                                         id="raised-button-file"
                                         // multiple
+                                        name="file"
                                         type="file"
                                         
                                         onChange={handleFile}
@@ -460,7 +453,7 @@ const AddItem = () => {
                                         </Button>
                                     
                                     </label>
-                                    {imageFile?<div style={{textAlign:"center"}}>File Selected</div>:""}
+                                    {/* {imageFile?<div style={{textAlign:"center"}}>File Selected</div>:""} */}
                                 </div>
                             </div>
                         }
