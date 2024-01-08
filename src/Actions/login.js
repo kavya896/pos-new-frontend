@@ -123,6 +123,10 @@ export const createItems =(name,catg,description,price,cost,sku,barcode,instock,
             }
         }
         const {data} = await axios.post("/api/v1/items",{name,catg,image,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors},config)
+        if(data){
+            localStorage.setItem("uploadImg",JSON.stringify(""))
+            localStorage.removeItem("uploadImg")
+        }
         dispatch({type:"CreateItemSuccess",payload:data})
         console.log(data)
     }catch(err){
