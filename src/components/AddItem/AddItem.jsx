@@ -29,9 +29,9 @@ const AddItem = () => {
     const [cost,setCost] =useState()
     const [sku,setsku] = useState()
     const [barcode,setBarcode] = useState()
-    const [instock,setInstock] = useState()
-    const [lowstock,setLowstock] =useState()
-    const [spicelevel,setSpicelevel] = useState(false)
+    const [inStock,setInstock] = useState()
+    const [lowStock,setLowstock] =useState()
+    const [spiceLevel,setSpicelevel] = useState(false)
     const [selectedValue, setSelectedValue] = useState('each')
     const [available,setAvailable] = useState(true)
     const [selected, setSelected] = useState('colors')
@@ -155,7 +155,7 @@ const AddItem = () => {
 
     const handleSave = () =>{
 
-        dispatch(createItems(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,color))
+        dispatch(createItems(name,catg,description,price,cost,sku,barcode,inStock,lowStock,available,selectedValue,spiceLevel,color))
        
     }
 
@@ -259,8 +259,8 @@ const AddItem = () => {
                             />
                             <p>Each</p>
                             <Radio
-                                checked={selectedValue === 'weight/volume'}
-                                onChange={()=>setSelectedValue("weight/volume")}
+                                checked={selectedValue === 'Weight/Volume'}
+                                onChange={()=>setSelectedValue("Weight/Volume")}
                                 value="weight"
                                 name="radio-buttons"
                                 inputProps={{ 'aria-label': 'B' }}
@@ -347,7 +347,7 @@ const AddItem = () => {
                                         defaultValue="0"
                                         variant="standard"
                                         onChange={(e)=>setInstock(e.target.value)}
-                                        value={instock}
+                                        value={inStock}
                                     />
 
                                     <TextField
@@ -356,7 +356,7 @@ const AddItem = () => {
                                         label="Low stock"
                                         color="success"
                                         onChange={(e)=>setLowstock(e.target.value)}
-                                        value={instock}
+                                        value={lowStock}
                                         helperText="Item quantity at which you will be notified about low stock."
                                         variant="standard"
                                     />
@@ -380,8 +380,8 @@ const AddItem = () => {
                             <div className="switchStyling">
                                 <Switch
                                     color="success"
-                                    checked={spicelevel}
-                                    onChange={()=>setSpicelevel(!spicelevel)}
+                                    checked={spiceLevel}
+                                    onChange={()=>setSpicelevel(!spiceLevel)}
                                     inputProps={{ 'aria-label': 'controlled' }}
                                 />
                             </div>

@@ -23,10 +23,10 @@ const UpdateItem = () => {
     const [cost,setCost] =useState()
     const [sku,setsku] = useState()
     const [barcode,setBarcode] = useState()
-    const [instock,setInstock] = useState()
-    const [lowstock,setLowstock] =useState()
-    const [spicelevel,setSpicelevel] = useState(false)
-    const [selectedValue, setSelectedValue] = useState('each')
+    const [inStock,setInstock] = useState()
+    const [lowStock,setLowstock] =useState()
+    const [spiceLevel,setSpicelevel] = useState(false)
+    const [selectedValue, setSelectedValue] = useState()
     const [available,setAvailable] = useState(true)
     const [selected, setSelected] = useState('colors')
 
@@ -170,7 +170,7 @@ const UpdateItem = () => {
         setsku(updateItem.SKU)
         setBarcode(updateItem.barcode)
         setInstock(updateItem.inStock)
-        setLowstock(updateItem.lowstock)
+        setLowstock(updateItem.lowStock)
         setSpicelevel(updateItem.spiceLevel)
         setAvailable(updateItem.available)
         setSelectedValue(updateItem.soldBy)
@@ -186,7 +186,7 @@ const UpdateItem = () => {
 
     const handleSave = () =>{
         var id = idkey.id
-        dispatch(updateItems(id,name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors))
+        dispatch(updateItems(id,name,catg,imgFile,description,price,cost,sku,barcode,inStock,lowStock,available,selectedValue,spiceLevel,color))
         navigate("/itemsList")
     }
     
@@ -194,15 +194,17 @@ const UpdateItem = () => {
    
     const handleFile = async (e)=>{
         
-
+        
         const image= e.target.files[0]
         console.log(image)
         var formdata = new FormData();
         formdata.append("image", image);
         console.log(formdata.get("image"))
 
-
-        dispatch(uploadImage(formdata.get("image")))
+        if(image){
+            dispatch(uploadImage(formdata.get("image")))
+        }
+        
     }
    
    
@@ -285,8 +287,8 @@ const UpdateItem = () => {
                             />
                             <p>Each</p>
                             <Radio
-                                checked={selectedValue === 'weight/volume'}
-                                onChange={()=>setSelectedValue("weight/volume")}
+                                checked={selectedValue === 'Weight/Volume'}
+                                onChange={()=>setSelectedValue("Weight/Volume")}
                                 value="weight"
                                 name="radio-buttons"
                                 inputProps={{ 'aria-label': 'B' }}
@@ -375,7 +377,7 @@ const UpdateItem = () => {
                                         defaultValue="0"
                                         variant="standard"
                                         onChange={(e)=>setInstock(e.target.value)}
-                                        value={instock}
+                                        value={inStock}
                                     />
 
                                     <TextField
@@ -384,7 +386,7 @@ const UpdateItem = () => {
                                         label="Low stock"
                                         color="success"
                                         onChange={(e)=>setLowstock(e.target.value)}
-                                        value={instock}
+                                        value={lowStock}
                                         helperText="Item quantity at which you will be notified about low stock."
                                         variant="standard"
                                     />
@@ -408,8 +410,8 @@ const UpdateItem = () => {
                             <div className="switchStyling">
                                 <Switch
                                     color="success"
-                                    checked={spicelevel}
-                                    onChange={()=>setSpicelevel(!spicelevel)}
+                                    checked={spiceLevel}
+                                    onChange={()=>setSpicelevel(!spiceLevel)}
                                     inputProps={{ 'aria-label': 'controlled' }}
                                 />
                             </div>

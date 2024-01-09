@@ -113,16 +113,15 @@ export const loginUsingPin = (pin) =>async(dispatch) =>{
     }
 }
 
-export const createItems =(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,color)=> async(dispatch)=>{
+export const createItems =(name,catg,description,price,cost,sku,barcode,inStock,lowStock,available,selectedValue,spiceLevel,color)=> async(dispatch)=>{
     try{
         const image = JSON.parse(localStorage.getItem("uploadImg"))
-        console.log(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,color)
         const config = {
             headers:{
                 "Content-type":"application/json"
             }
         }
-        const {data} = await axios.post("/api/v1/items",{name,catg,image,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,color},config)
+        const {data} = await axios.post("/api/v1/items",{name,catg,image,description,price,cost,SKU:sku,barcode,inStock,lowStock,available,soldBy:selectedValue,spiceLevel,color},config)
         if(data){
             localStorage.setItem("uploadImg",JSON.stringify(""))
             localStorage.removeItem("uploadImg")
@@ -152,22 +151,34 @@ export const uploadImage = (image)=>async(req,res)=>{
     }
 }
 
-export const updateItems =(id,name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors)=>async(dispatch)=>{
+export const updateItems =(id,name,catg,imgFile,description,price,cost,sku,barcode,inStock,lowStock,available,selectedValue,spiceLevel,color)=>async(dispatch)=>{
     try{
-        console.log("actions from updatet")
+    
         const image = JSON.parse(localStorage.getItem("uploadImg"))
+       
         const config = {
             headers:{
                 "Content-type":"application/json"
             }
         }
-        const {data} = await axios.post(`/api/v1/updateItem/${id}`,{name,catg,image,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors},config)
-        dispatch({type:"UpdateItemSuccess",payload:data})
-        if(data){
-            localStorage.setItem("uploadImg",JSON.stringify(""))
-            localStorage.removeItem("uploadImg")
+        if(image){
+            const {data} = await axios.post(`/api/v1/updateItem/${id}`,{name,catg,image,description,price,cost,SKU:sku,barcode,inStock,lowStock,available,soldBy:selectedValue,spiceLevel,color},config)
+            dispatch({type:"UpdateItemSuccess",payload:data})
+            if(data){
+                localStorage.setItem("uploadImg",JSON.stringify(""))
+                localStorage.removeItem("uploadImg")
+            }
+            console.log(data)
+        }else{
+            const {data} = await axios.post(`/api/v1/updateItem/${id}`,{name,catg,image:imgFile,description,price,cost,SKU:sku,barcode,inStock,lowStock,available,soldBy:selectedValue,spiceLevel,color},config)
+            dispatch({type:"UpdateItemSuccess",payload:data})
+            if(data){
+                localStorage.setItem("uploadImg",JSON.stringify(""))
+                localStorage.removeItem("uploadImg")
+            }
+            console.log(data)
         }
-        console.log(data)
+       
         
     }catch(err){
         console.log(err)
