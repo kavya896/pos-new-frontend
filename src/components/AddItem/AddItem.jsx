@@ -455,7 +455,7 @@ const AddItem = () => {
                                         onChange={handleFile}
                                     />
                                     <label htmlFor="raised-button-file">
-                                        <Button variant="raised" component="span" style={{marginLeft:"297px",marginTop:"-54px",backgroundColor:"green",width:"126px",color:"white"}} >
+                                        <Button variant="raised" component="span" style={{marginLeft:"297px",marginTop:"-54px",backgroundColor:"#0f5171",width:"126px",color:"white"}} >
                                             Upload
                                         </Button>
                                     
@@ -470,7 +470,7 @@ const AddItem = () => {
                     <div style={{backgroundColor:"rgba(234, 230, 230, 0.915)"}}>
                        
                         <Button style={{backgroundColor:"white",color:"black",margin:"0px 20px 0px 500px",marginBottom:"20px"}}>CANCEL</Button>
-                        <Button style={{backgroundColor:"rgb(152, 192, 51)",color:"white",marginBottom:"20px"}} onClick={handleSave}>SAVE</Button>
+                        <Button style={{backgroundColor:"#0f5171",color:"white",marginBottom:"20px"}} onClick={handleSave}>SAVE</Button>
                         
                        
                     </div>

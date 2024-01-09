@@ -96,7 +96,7 @@ const Items = () => {
                 <div className="itemspage-setup">
 
                     <div className="addItems">
-                        <Button style={{ backgroundColor: "rgb(152, 192, 51)" }}><a href="/addItems" style={{ textDecoration: "none", color: "white" }}>+ADD ITEM</a></Button>
+                        <Button style={{ backgroundColor: "#0f5171" }}><a href="/addItems" style={{ textDecoration: "none", color: "white" }}>+ADD ITEM</a></Button>
 
                         <Button style={{ color: "black", marginLeft: "40px" }}>IMPORT</Button>
                         <Button style={{ color: "black" }}>EXPORT</Button>

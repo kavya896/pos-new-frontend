@@ -11,10 +11,18 @@ import HelpOutlineRoundedIcon from '@mui/icons-material/HelpOutlineRounded';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import { Button, Dialog, DialogActions, Menu, MenuItem } from "@mui/material";
+
 const HomePage = () => {
     const [open, setOpen] = useState(false)
     const [report,setReport] = useState(false)
     const [item,setItem] = useState(false)
+
+    const handleSignOut = ()=>{
+        localStorage.removeItem("userInfo")
+        localStorage.clear()
+        
+    }
+
     return (
 
         <div className="bar">
@@ -35,13 +43,13 @@ const HomePage = () => {
                     <Menu open={open} onClose={()=>setOpen(false)} style={{marginLeft:"55px",marginTop:"-520px"}}  >
                       
                         <MenuItem ><a href="/" style={{textDecoration:"none", color:"black"}}>Account</a></MenuItem>
-                        <MenuItem><a href="/" style={{textDecoration:"none",color:"black"}}>Sign out</a></MenuItem>
+                        <MenuItem onClick={handleSignOut}><a href="/" style={{textDecoration:"none",color:"black"}} >Sign out</a></MenuItem>
                        
                     </Menu>
                 </div>
 
                 <div className="iconStyling report" onClick={()=>setReport(true)}>
-                    <EqualizerIcon fontSize="medium" style={{ margin: "12px 20px", color: "rgb(78, 196, 78)" }} />
+                    <EqualizerIcon fontSize="medium" style={{ margin: "12px 20px", color: "#0f5171" }} />
                 </div>
                 <div className="reportDiv">
                     Reports
