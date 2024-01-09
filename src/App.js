@@ -7,6 +7,7 @@ import Items from "./components/Items/Items";
 import AddItem from "./components/AddItem/AddItem";
 import Category from "./components/Categories/Categories";
 import UpdateItem from "./components/UpdateItem/UpdateItem";
+import Successful from "./components/successful/successful";
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/itemsList" element={<Items/>}></Route>
         <Route path="/category" element={<Category/>}></Route>
         <Route path="/updateItem/:id" element={<UpdateItem/>} ></Route>
+        <Route path="/successful" element={<Successful/>}></Route>
       </Routes>
     </Router>
   

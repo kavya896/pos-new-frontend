@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-// import "./AddItem.css"
+import "./UpdateItem.css"
 import { Accordion, AccordionDetails, AccordionSummary, Autocomplete, Box, Button, Checkbox, Dialog, FormControlLabel, FormGroup, Menu, MenuItem, MenuPaper, Paper, Radio, SvgIcon, Switch, TextField, Typography, colors } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux"
-import { categoryList, createItems, getCategoryByName, getItemById, updateItems } from "../../Actions/login";
+import { categoryList, createItems, getCategoryByName, getItemById, updateItems, uploadImage } from "../../Actions/login";
 import ToggleOffOutlinedIcon from '@mui/icons-material/ToggleOffOutlined';
 import DoneIcon from '@mui/icons-material/Done';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
@@ -30,6 +30,7 @@ const UpdateItem = () => {
     const [available,setAvailable] = useState(true)
     const [selected, setSelected] = useState('colors')
 
+    const [imgFile,setImgFile] = useState()
     const [one,setOne] = useState("#cfcaca")
     const [two,setTwo] = useState()
     const [third,setThird] = useState()
@@ -38,18 +39,18 @@ const UpdateItem = () => {
     const [sixth,setSixth] = useState()
     const [seven,setSeven] = useState()
     const [eight,setEight] = useState()
-    const [colors,setColors] = useState()
-    const [square,setSquare] = useState("black")
-    const [circle,setCircle] = useState()
+    const [color,setColors] = useState()
+    // const [square,setSquare] = useState("black")
+    // const [circle,setCircle] = useState()
 
-    const handlesquare = () =>{
-        setSquare("black")
-        setCircle("")
-    }
-    const handleCircle = () =>{
-        setSquare("")
-        setCircle("black")
-    }
+    // const handlesquare = () =>{
+    //     setSquare("black")
+    //     setCircle("")
+    // }
+    // const handleCircle = () =>{
+    //     setSquare("")
+    //     setCircle("black")
+    // }
 
     const handleOne = ()=>{
         setOne("#cfcaca")
@@ -65,6 +66,7 @@ const UpdateItem = () => {
     const handletwo = ()=>{
         setOne("")
         setTwo("red")
+        setColors("red")
         setThird("")
         setFourth("")
         setFifth("")
@@ -76,6 +78,7 @@ const UpdateItem = () => {
         setOne("")
         setTwo("")
         setThird("#e91e63")
+        setColors("#e91e63")
         setFourth("")
         setFifth("")
         setSixth("")
@@ -87,6 +90,7 @@ const UpdateItem = () => {
         setTwo("")
         setThird("")
         setFourth("#ff9800")
+        setColors("#ff9800")
         setFifth("")
         setSixth("")
         setSeven("")
@@ -98,6 +102,7 @@ const UpdateItem = () => {
         setThird("")
         setFourth("")
         setFifth("#cddc39")
+        setColors("#cddc39")
         setSixth("")
         setSeven("")
         setEight("")
@@ -109,6 +114,7 @@ const UpdateItem = () => {
         setFourth("")
         setFifth("")
         setSixth("#4caf50")
+        setColors("#4caf50")
         setSeven("")
         setEight("")
     }
@@ -120,6 +126,7 @@ const UpdateItem = () => {
         setFifth("")
         setSixth("")
         setSeven("#0091ea")
+        setColors("#0091ea")
         setEight("")
     }
     const handleEight = ()=>{
@@ -131,7 +138,9 @@ const UpdateItem = () => {
         setSixth("")
         setSeven("")
         setEight("#9c27b0")
+        setColors("#9c27b0")
     }
+
 
     
 
@@ -165,7 +174,7 @@ const UpdateItem = () => {
         setSpicelevel(updateItem.spiceLevel)
         setAvailable(updateItem.available)
         setSelectedValue(updateItem.soldBy)
-        
+        setImgFile(updateItem.image)
            
         
         
@@ -183,7 +192,18 @@ const UpdateItem = () => {
     
     
    
-    
+    const handleFile = async (e)=>{
+        
+
+        const image= e.target.files[0]
+        console.log(image)
+        var formdata = new FormData();
+        formdata.append("image", image);
+        console.log(formdata.get("image"))
+
+
+        dispatch(uploadImage(formdata.get("image")))
+    }
    
    
   
@@ -435,22 +455,20 @@ const UpdateItem = () => {
 
 
                                 </div>
-                                <div className="shapesStyling">
+                                {/* <div className="shapesStyling">
                                     <div className="shape" style={{ border: "0.5px solid black" }} onClick={handlesquare} ><DoneIcon sx={{ color: square ? "black" : "white" }} /></div>
                                     <div className="shape" style={{ border: "0.5px solid black", borderRadius: "50px" }} onClick={handleCircle}><DoneIcon sx={{ color: circle ? "black" : "white" }} /></div>
 
-                                </div>
+                                </div> */}
                             </div>
 
                         }
+                       
                         {
                             selected == 'image' &&
                             <div>
-                                <div>
-                                    <div className="image-background">
-                                       <InsertPhotoIcon style={{marginLeft: "40px",marginTop:"49px",fontSize:"xxx-large"}}/>
-  
-                                    </div>
+                                {imgFile? <>   <div>
+                                    <img src={imgFile} width={200} height={200} className="imgSettings"></img>
                                     <input
                                         accept="image/*"
                                         // className={classes.input}
@@ -458,14 +476,37 @@ const UpdateItem = () => {
                                         id="raised-button-file"
                                         multiple
                                         type="file"
+                                        onChange={handleFile}
                                     />
-                                    <label htmlFor="raised-button-file">
-                                        <Button variant="raised" component="span" style={{marginLeft:"297px",marginTop:"-54px",backgroundColor:"green",width:"126px",color:"white"}} >
-                                            Upload
-                                        </Button>
-  
-                                    </label>
-                                </div>
+                                   
+                                    
+                           
+                                </div></>:
+                                   <div>
+                                   <div className="image-background">
+                                      <InsertPhotoIcon style={{marginLeft: "40px",marginTop:"49px",fontSize:"xxx-large"}}/>
+ 
+                                   </div>
+                                   <input
+                                       accept="image/*"
+                                       // className={classes.input}
+                                       style={{ display: 'none' }}
+                                       id="raised-button-file"
+                                       multiple
+                                       type="file"
+                                       onChange={handleFile}
+                                   />
+                                  
+                                   
+                               </div>
+                                }
+                             
+                             <label htmlFor="raised-button-file">
+                                       <Button variant="raised" component="span" style={{marginLeft:"297px",marginTop:"-54px",backgroundColor:"green",width:"126px",color:"white"}} >
+                                           Upload
+                                       </Button>
+ 
+                                   </label>
                             </div>
                         }
 

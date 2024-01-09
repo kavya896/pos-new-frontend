@@ -46,18 +46,18 @@ const AddItem = () => {
     const [sixth,setSixth] = useState()
     const [seven,setSeven] = useState()
     const [eight,setEight] = useState()
-    const [colors,setColors] = useState()
-    const [square,setSquare] = useState("black")
-    const [circle,setCircle] = useState()
+    const [color,setColors] = useState()
+    // const [square,setSquare] = useState("black")
+    // const [circle,setCircle] = useState()
 
-    const handlesquare = () =>{
-        setSquare("black")
-        setCircle("")
-    }
-    const handleCircle = () =>{
-        setSquare("")
-        setCircle("black")
-    }
+    // const handlesquare = () =>{
+    //     setSquare("black")
+    //     setCircle("")
+    // }
+    // const handleCircle = () =>{
+    //     setSquare("")
+    //     setCircle("black")
+    // }
 
     const handleOne = ()=>{
         setOne("#cfcaca")
@@ -73,6 +73,7 @@ const AddItem = () => {
     const handletwo = ()=>{
         setOne("")
         setTwo("red")
+        setColors("red")
         setThird("")
         setFourth("")
         setFifth("")
@@ -84,6 +85,7 @@ const AddItem = () => {
         setOne("")
         setTwo("")
         setThird("#e91e63")
+        setColors("#e91e63")
         setFourth("")
         setFifth("")
         setSixth("")
@@ -95,6 +97,7 @@ const AddItem = () => {
         setTwo("")
         setThird("")
         setFourth("#ff9800")
+        setColors("#ff9800")
         setFifth("")
         setSixth("")
         setSeven("")
@@ -106,6 +109,7 @@ const AddItem = () => {
         setThird("")
         setFourth("")
         setFifth("#cddc39")
+        setColors("#cddc39")
         setSixth("")
         setSeven("")
         setEight("")
@@ -117,6 +121,7 @@ const AddItem = () => {
         setFourth("")
         setFifth("")
         setSixth("#4caf50")
+        setColors("#4caf50")
         setSeven("")
         setEight("")
     }
@@ -128,6 +133,7 @@ const AddItem = () => {
         setFifth("")
         setSixth("")
         setSeven("#0091ea")
+        setColors("#0091ea")
         setEight("")
     }
     const handleEight = ()=>{
@@ -139,6 +145,7 @@ const AddItem = () => {
         setSixth("")
         setSeven("")
         setEight("#9c27b0")
+        setColors("#9c27b0")
     }
 
     
@@ -148,7 +155,7 @@ const AddItem = () => {
 
     const handleSave = () =>{
 
-        dispatch(createItems(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,colors))
+        dispatch(createItems(name,catg,description,price,cost,sku,barcode,instock,lowstock,available,selectedValue,spicelevel,color))
        
     }
 
@@ -420,11 +427,11 @@ const AddItem = () => {
 
 
                                 </div>
-                                <div className="shapesStyling">
+                                {/* <div className="shapesStyling">
                                     <div className="shape" style={{ border: "0.5px solid black" }} onClick={handlesquare} ><DoneIcon sx={{ color: square ? "black" : "white" }} /></div>
                                     <div className="shape" style={{ border: "0.5px solid black", borderRadius: "50px" }} onClick={handleCircle}><DoneIcon sx={{ color: circle ? "black" : "white" }} /></div>
 
-                                </div>
+                                </div> */}
                             </div>
 
                         }
