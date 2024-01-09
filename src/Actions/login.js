@@ -71,7 +71,7 @@ export const ItemsList = () => async(dispatch)=>{
         dispatch({type:"CountSuccess",payload:data.totalPages})
 
     }catch(err){
-        dispatch({type:"ItemFail",payload:err})
+        // dispatch({type:"ItemFail",payload:err})
         console.log(err)
     }
 }
@@ -92,7 +92,7 @@ export const paginationOfItems = (pageNo,rowsPerPage,selectcatg,select,search)=>
         dispatch({type:"ItemSuccess",payload:data.list})
         dispatch({type:"CountSuccess",payload:data.totalPages})
     }catch(err){
-        dispatch({type:"ItemFail",payload:err})
+        // dispatch({type:"ItemFail",payload:err})
         console.log(err)
     }
 }

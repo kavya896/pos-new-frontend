@@ -278,9 +278,9 @@ const UpdateItem = () => {
                                 Sold by
                             </p>
                             <Radio
-                                checked={selectedValue === 'each'}
-                                onChange={()=>setSelectedValue("each")}
-                                value="each"
+                                checked={selectedValue === 'Each'}
+                                onChange={()=>setSelectedValue("Each")}
+                                value="Each"
                                 name="radio-buttons"
                                 inputProps={{ 'aria-label': 'A' }}
                                 color="success"

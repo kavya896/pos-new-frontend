@@ -32,7 +32,7 @@ const AddItem = () => {
     const [inStock,setInstock] = useState()
     const [lowStock,setLowstock] =useState()
     const [spiceLevel,setSpicelevel] = useState(false)
-    const [selectedValue, setSelectedValue] = useState('each')
+    const [selectedValue, setSelectedValue] = useState('Each')
     const [available,setAvailable] = useState(true)
     const [selected, setSelected] = useState('colors')
 
@@ -250,9 +250,9 @@ const AddItem = () => {
                                 Sold by
                             </p>
                             <Radio
-                                checked={selectedValue === 'each'}
-                                onChange={()=>setSelectedValue("each")}
-                                value="each"
+                                checked={selectedValue === 'Each'}
+                                onChange={()=>setSelectedValue("Each")}
+                                value="Each"
                                 name="radio-buttons"
                                 inputProps={{ 'aria-label': 'A' }}
                                 color="success"

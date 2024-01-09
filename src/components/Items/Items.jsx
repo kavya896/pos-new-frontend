@@ -42,14 +42,15 @@ const Items = () => {
     }, [dispatch])
 
     useEffect(()=>{
-        console.log(search)
+        
         dispatch(paginationOfItems(page, rowsPerPage, selectcatg, select,search))
     },[search])
 
     const { category } = useSelector((state) => state.category)
     const { items } = useSelector((state) => state.items)
     const { stocks } = useSelector((state) => state.stocks)
-    console.log("items from",items)
+    const {count } = useSelector((state)=>state.count)
+    console.log("...........",count)
    
     
     const handleChange = (e) => {
@@ -69,6 +70,7 @@ const Items = () => {
 
     }
     const handleNextPage = () => {
+        
         const pageNo = page + 1
         setPage(pageNo)
 
@@ -235,7 +237,7 @@ const Items = () => {
                     <div className="pageno" >
 
                         <Button disabled={page <= 1 ? true : false} onClick={handlePreviousPage} ><ArrowBackIosIcon style={{ border: "0.5px solid black", padding: "5px" }} /></Button>
-                        <Button onClick={handleNextPage} ><ArrowForwardIosIcon style={{ border: "0.5px solid black", padding: "5px" }} /></Button>
+                        <Button onClick={handleNextPage} disabled={page<=count?false:true} ><ArrowForwardIosIcon style={{ border: "0.5px solid black", padding: "5px" }} /></Button>
                         <InputLabel id="demo-simple-select-label" style={{ marginLeft: "20px" }} >PageNo:</InputLabel>
                         <div >
 
