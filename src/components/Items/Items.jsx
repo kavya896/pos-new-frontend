@@ -237,7 +237,7 @@ const Items = () => {
                     <div className="pageno" >
 
                         <Button disabled={page <= 1 ? true : false} onClick={handlePreviousPage} ><ArrowBackIosIcon style={{ border: "0.5px solid black", padding: "5px" }} /></Button>
-                        <Button onClick={handleNextPage} disabled={page<=count?false:true} ><ArrowForwardIosIcon style={{ border: "0.5px solid black", padding: "5px" }} /></Button>
+                        <Button onClick={handleNextPage} disabled={page<count?false:true} ><ArrowForwardIosIcon style={{ border: "0.5px solid black", padding: "5px" }} /></Button>
                         <InputLabel id="demo-simple-select-label" style={{ marginLeft: "20px" }} >PageNo:</InputLabel>
                         <div >
 

@@ -8,6 +8,7 @@ import UpdateItemReducer from "./reducer/updateItem";
 import GetItemReducer from "./reducer/getItem";
 import categoryNameReducer from "./reducer/categoryByname";
 import CountReducer from "./reducer/count";
+import DeleteReducer from "./reducer/delete";
 
 const store = configureStore({
     reducer:{
@@ -19,7 +20,8 @@ const store = configureStore({
         updates : UpdateItemReducer,
         getItems : GetItemReducer,
         byNames : categoryNameReducer,
-        count : CountReducer
+        count : CountReducer,
+        deleted : DeleteReducer
        
     }
 });

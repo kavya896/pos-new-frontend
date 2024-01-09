@@ -228,3 +228,20 @@ export const getCategoryByName =(name)=> async(dispatch) =>{
         console.log(err)
     }
 }
+
+
+export const deleteItem = (id)=>async(dispatch)=>{
+    try{
+        console.log(id)
+        const config = {
+            headers:{
+                "Content-type":"application/json"
+            }
+        }
+        const {data} = await axios.get(`/api/v1/deleteItem/${id}`,config)
+        const deleted = "deleted"
+        dispatch({type:"DeleteSuccess",payload:deleted})
+    }catch(err){
+        console.log(err)
+    }
+}

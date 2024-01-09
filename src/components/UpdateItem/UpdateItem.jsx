@@ -3,7 +3,7 @@ import "./UpdateItem.css"
 import { Accordion, AccordionDetails, AccordionSummary, Autocomplete, Box, Button, Checkbox, Dialog, FormControlLabel, FormGroup, Menu, MenuItem, MenuPaper, Paper, Radio, SvgIcon, Switch, TextField, Typography, colors } from "@mui/material";
 
 import { useDispatch, useSelector } from "react-redux"
-import { categoryList, createItems, getCategoryByName, getItemById, updateItems, uploadImage } from "../../Actions/login";
+import { categoryList, createItems, deleteItem, getCategoryByName, getItemById, updateItems, uploadImage } from "../../Actions/login";
 import ToggleOffOutlinedIcon from '@mui/icons-material/ToggleOffOutlined';
 import DoneIcon from '@mui/icons-material/Done';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
@@ -206,8 +206,21 @@ const UpdateItem = () => {
         }
         
     }
+
+    
+    const { deleted } = useSelector((state) => state.deleted)
    
-   
+    useEffect(()=>{
+       if(deleted){
+        alert("deleted successfully")
+        navigate("/itemsList")
+       }
+    },[deleted])
+
+   const handleDelete = ()=>{
+    var id = idkey.id
+        dispatch(deleteItem(id))
+   }
   
 
 
@@ -515,7 +528,8 @@ const UpdateItem = () => {
                     <div className="spacing"></div>
                     </div>
                     <div style={{backgroundColor:"rgba(234, 230, 230, 0.915)"}}>
-                       
+                    <Button style={{backgroundColor:"white",color:"black",margin:"0px 20px 0px 0px",marginBottom:"20px"}} onClick={handleDelete}>Delete</Button>
+                        
                         <Button style={{backgroundColor:"white",color:"black",margin:"0px 20px 0px 500px",marginBottom:"20px"}}>CANCEL</Button>
                         <Button style={{backgroundColor:"#0f5171",color:"white",marginBottom:"20px"}} onClick={handleSave}>SAVE</Button>
                         
