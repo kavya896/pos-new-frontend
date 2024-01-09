@@ -49,11 +49,14 @@ const Items = () => {
     const { category } = useSelector((state) => state.category)
     const { items } = useSelector((state) => state.items)
     const { stocks } = useSelector((state) => state.stocks)
-    
+    console.log("items from",items)
    
     
     const handleChange = (e) => {
+         
         setRowsperpage(e.target.value)
+       
+        dispatch(paginationOfItems(page,e.target.value,selectcatg,select,search))
     }
 
     const handlePreviousPage = () => {
@@ -246,7 +249,7 @@ const Items = () => {
                             value={rowsPerPage}
                             size="small"
                             sx={{ fontSize: 15, padding: "0px" }}
-
+                            
                             label="RowsPerPage"
                             onChange={handleChange}
                         >

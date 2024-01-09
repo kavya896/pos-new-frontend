@@ -65,8 +65,10 @@ export const ItemsList = () => async(dispatch)=>{
             }
         }
         const {data} = await axios.get("/api/v1/items",config)
-        console.log("list from actions",data)
-        dispatch({type:"ItemSuccess",payload:data})
+        
+        dispatch({type:"ItemSuccess",payload:data.list})
+        
+        dispatch({type:"CountSuccess",payload:data.totalPages})
 
     }catch(err){
         dispatch({type:"ItemFail",payload:err})
@@ -86,8 +88,9 @@ export const paginationOfItems = (pageNo,rowsPerPage,selectcatg,select,search)=>
             }
         }
         const {data} = await axios.get(`api/v1/items?pageNo=${pageNo}&rowsPerPage=${rowsPerPage}&category=${category}&stocks=${stocks}&search=${search}`,config)
-        console.log("list from pagination",data)
-        dispatch({type:"ItemSuccess",payload:data})
+    
+        dispatch({type:"ItemSuccess",payload:data.list})
+        dispatch({type:"CountSuccess",payload:data.totalPages})
     }catch(err){
         dispatch({type:"ItemFail",payload:err})
         console.log(err)
