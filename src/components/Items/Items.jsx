@@ -28,6 +28,7 @@ const Items = () => {
     const [selectcatg, setSelectcatg] = useState("")
     const [open, setOpen] = useState(false)
     const [itemId,setItemId] = useState()
+    const [check,setCheck] = useState()
 
     const dispatch = useDispatch()
 
@@ -90,7 +91,20 @@ const Items = () => {
         dispatch(paginationOfItems(page, rowsPerPage, selectcatg, value.name,search))
     }
     // const refresh =localStorage.setItem("refresh",JSON.stringify({"refresh":true}))
-   
+    const [isChecked, setisChecked]= useState([]);
+   const handlecheckbox = (e)=>{
+    const {value, checked}= e.target;
+    console.log(value);
+    if(checked)
+    {
+      setisChecked([...isChecked, value]);
+    } else{
+      setisChecked(isChecked.filter( (e)=>e!== value));
+    }
+  }
+  const handledeleteCheckbox = () =>{
+    console.log(isChecked)
+  }
 
     return (
 
@@ -102,7 +116,7 @@ const Items = () => {
 
                     <div className="addItems">
                         <Button style={{ backgroundColor: "#0f5171" }}><a href="/addItems" style={{ textDecoration: "none", color: "white" }}>+ADD ITEM</a></Button>
-
+                        {isChecked.length>0?<> <Button style={{ color: "black", marginLeft: "40px" }} onClick={handledeleteCheckbox}>Delete</Button></>:""}
                         <Button style={{ color: "black", marginLeft: "40px" }}>IMPORT</Button>
                         <Button style={{ color: "black" }}>EXPORT</Button>
 
@@ -212,13 +226,13 @@ const Items = () => {
                                     <TableRow
                                         key={item._id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        onClick={()=>navigate(`/updateItem/${item._id}`)}
+                                        
                                        
                                         
                                        
                                     >
-                                        <TableCell style={{ padding: "5px" }} ><Checkbox /></TableCell>
-                                        <TableCell component="th" scope="row" style={{ padding: "5px" }} >
+                                        <TableCell style={{ padding: "5px" }} ><Checkbox value={item._id}  onClick={(e)=>handlecheckbox(e)} /></TableCell>
+                                        <TableCell component="th" scope="row" style={{ padding: "5px" }} onClick={()=>navigate(`/updateItem/${item._id}`)}>
                                             {item.name}
                                         </TableCell>
                                         <TableCell style={{ padding: "5px" }} align="right">{item.category}</TableCell>
