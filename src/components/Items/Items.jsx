@@ -103,7 +103,8 @@ const Items = () => {
     }
   }
   const handledeleteCheckbox = () =>{
-   dispatch(deleteManyItems(JSON.stringify(isChecked)))
+   dispatch(deleteManyItems(isChecked))
+   window.location.reload()
   }
 
     return (
