@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Autocomplete, Button, Checkbox, Dialog, InputLabel, Menu, MenuItem, Pagination, Select, Stack, TablePagination, TextField } from "@mui/material";
 import "./Items.css"
 import { useDispatch, useSelector } from "react-redux"
-import { ItemsList, StockList, categoryList, getItemById, paginationOfItems } from "../../Actions/login";
+import { ItemsList, StockList, categoryList, deleteManyItems, getItemById, paginationOfItems } from "../../Actions/login";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import Table from '@mui/material/Table';
@@ -103,7 +103,7 @@ const Items = () => {
     }
   }
   const handledeleteCheckbox = () =>{
-    console.log(isChecked)
+   dispatch(deleteManyItems(JSON.stringify(isChecked)))
   }
 
     return (

@@ -245,3 +245,17 @@ export const deleteItem = (id)=>async(dispatch)=>{
         console.log(err)
     }
 }
+
+export const deleteManyItems = (id)=>async(dispatch)=>{
+    try{
+        const config = {
+            headers:{
+                "Content-type":"application/json"
+            }
+        }
+        const {data} = await axios.get(`/api/v1/delete/${id}`,config)
+        console.log(data)
+    }catch(err){
+        console.log(err)
+    }
+} 
