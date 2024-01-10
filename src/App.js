@@ -8,6 +8,7 @@ import AddItem from "./components/AddItem/AddItem";
 import Category from "./components/Categories/Categories";
 import UpdateItem from "./components/UpdateItem/UpdateItem";
 import Successful from "./components/successful/successful";
+import Categories from "./components/Categories/Categories";
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
         <Route path="/dashboard" element={<HomePage/>} ></Route>
         <Route path="/addItems" element={<AddItem/>} ></Route>
         <Route path="/itemsList" element={<Items/>}></Route>
-        <Route path="/category" element={<Category/>}></Route>
+        <Route path="/category" element={<Categories/>}></Route>
         <Route path="/updateItem/:id" element={<UpdateItem/>} ></Route>
         <Route path="/successful" element={<Successful/>}></Route>
       </Routes>

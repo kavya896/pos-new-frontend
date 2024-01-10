@@ -75,7 +75,7 @@ const HomePage = () => {
                     <Menu open={item} onClose={()=>setItem(false)}  style={{marginLeft:"55px",marginTop:"-350px"}}  >
                       
                         <MenuItem><a href="/itemsList" style={{textDecoration:"none", color:"black"}}>Item list</a></MenuItem>
-                        <MenuItem><a href="/" style={{textDecoration:"none",color:"black"}}>Categories</a></MenuItem>
+                        <MenuItem><a href="/category" style={{textDecoration:"none",color:"black"}}>Categories</a></MenuItem>
                         <MenuItem><a href="/" style={{textDecoration:"none",color:"black"}}>Modifiers</a></MenuItem>
                         <MenuItem><a href="/" style={{textDecoration:"none",color:"black"}}>Discounts</a></MenuItem>
                        

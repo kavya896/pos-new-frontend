@@ -1,0 +1,8 @@
+.categorypage-setup{
+    background-color: white;
+    /* height: 633px; */
+    position: absolute;
+    overflow: auto;
+    width: 55%;
+    margin-right: 20px;
+}
