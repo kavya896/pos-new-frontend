@@ -117,7 +117,7 @@ const Items = () => {
 
                     <div className="addItems">
                         <Button style={{ backgroundColor: "#0f5171" }}><a href="/addItems" style={{ textDecoration: "none", color: "white" }}>+ADD ITEM</a></Button>
-                        {isChecked.length>0?<> <Button style={{ color: "black", marginLeft: "40px" }} onClick={handledeleteCheckbox}>Delete</Button></>:""}
+                        {isChecked.length>0?<> <Button style={{ color: "white", backgroundColor:"red", marginLeft: "40px" }} onClick={handledeleteCheckbox}>Delete</Button></>:""}
                         <Button style={{ color: "black", marginLeft: "40px" }}>IMPORT</Button>
                         <Button style={{ color: "black" }}>EXPORT</Button>
 
@@ -211,7 +211,7 @@ const Items = () => {
                         <Table aria-label="simple table">
                             <TableHead sx={{ color: "red" }}>
                                 <TableRow >
-                                    <TableCell style={{ color: "rgba(154, 151, 151, 0.915)", padding: "5px" }}><Checkbox /></TableCell>
+                                    <TableCell style={{ color: "rgba(154, 151, 151, 0.915)", padding: "5px" }}></TableCell>
                                     <TableCell style={{ color: "rgba(154, 151, 151, 0.915)", padding: "5px" }}>Item Name</TableCell>
                                     <TableCell style={{ color: "rgba(154, 151, 151, 0.915)", padding: "5px" }} align="right">Category</TableCell>
                                     <TableCell style={{ color: "rgba(154, 151, 151, 0.915)", padding: "5px" }} align="right">Price</TableCell>

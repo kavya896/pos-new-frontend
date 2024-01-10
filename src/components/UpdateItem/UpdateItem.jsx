@@ -14,7 +14,8 @@ import { useParams } from "react-router-dom";
 const UpdateItem = () => {
     
     const navigate = useNavigate()
-    
+  
+   
     const [name,setName] = useState()
     const [catg,setCatg] = useState()
     const [placecatg, setPlaceCatg] = useState({})
@@ -176,7 +177,7 @@ const UpdateItem = () => {
         setSelectedValue(updateItem.soldBy)
         setImgFile(updateItem.image)
            
-        
+       
         
         
         
