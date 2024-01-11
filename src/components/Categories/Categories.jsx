@@ -25,13 +25,13 @@ const Categories = () => {
     return (
 
         <div>
-            <div className="title">Item List</div>
+            <div className="title">Categories</div>
             <div className="itemspage">
 
                 <div className="categorypage-setup">
 
                     <div className="addItems">
-                        <Button style={{ backgroundColor: "#0f5171" }}><a href="/addItems" style={{ textDecoration: "none", color: "white" }}>+ADD CATEGORY</a></Button>
+                        <Button style={{ backgroundColor: "#0f5171" }}><a href="/createCategory" style={{ textDecoration: "none", color: "white" }}>+ADD CATEGORY</a></Button>
                         
 
 
