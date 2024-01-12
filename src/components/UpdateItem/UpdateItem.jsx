@@ -176,13 +176,6 @@ const UpdateItem = () => {
         setAvailable(updateItem.available)
         setSelectedValue(updateItem.soldBy)
         setImgFile(updateItem.image)
-           
-       
-        
-        
-        
-       
-       
     }, [dispatch])
 
     const handleSave = () =>{
@@ -191,8 +184,6 @@ const UpdateItem = () => {
         navigate("/itemsList")
     }
     
-    
-   
     const handleFile = async (e)=>{
         
         

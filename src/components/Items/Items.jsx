@@ -227,10 +227,6 @@ const Items = () => {
                                     <TableRow
                                         key={item._id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                        
-                                       
-                                        
-                                       
                                     >
                                         <TableCell style={{ padding: "5px" }} ><Checkbox value={item._id}  onClick={(e)=>handlecheckbox(e)} /></TableCell>
                                         <TableCell component="th" scope="row" style={{ padding: "5px" }} onClick={()=>navigate(`/updateItem/${item._id}`)}>

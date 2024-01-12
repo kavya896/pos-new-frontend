@@ -1,6 +1,5 @@
 import axios from "axios"
 
-
 export const login = (email,password) =>async(dispatch)=>{
     try{
        
@@ -259,3 +258,53 @@ export const deleteManyItems = (id)=>async(dispatch)=>{
         console.log(err)
     }
 } 
+
+export const createCategiry =(name, color)=> async(dispatch)=>{
+    try{
+        const config = {
+            headers:{
+                "Content-type":"application/json"
+            }
+        }
+        const {data} = await axios.post("/api/v1/category",{name,color},config)
+        dispatch({type:"CreateCategorySuccess",payload:data})
+        return data
+    }catch(err){
+        dispatch({type:"CreateCategoryFail",payload:err.response.data.message})
+        console.log(err.response.data.message)
+    }
+}
+
+export const deleteCategory = (id)=>async(dispatch)=>{
+    try{
+        console.log(id)
+        const config = {
+            headers:{
+                "Content-type":"application/json"
+            }
+        }
+        const {data} = await axios.post(`/api/v1/category_delete/`,{id}, config)
+        const deleted = "deleted"
+        dispatch({type:"DeleteSuccess",payload:deleted})
+        return data
+    }catch(err){
+        console.log(err)
+    }
+}
+
+export const editCategory = (id, name)=>async(dispatch)=>{
+    try{
+        console.log(id)
+        const config = {
+            headers:{
+                "Content-type":"application/json"
+            }
+        }
+        const {data} = await axios.post(`/api/v1/edit_category/`,{id, name}, config)
+        const edited = "edited"
+        dispatch({type:"DeleteSuccess",payload:edited})
+        return data
+    }catch(err){
+        console.log(err)
+    }
+}

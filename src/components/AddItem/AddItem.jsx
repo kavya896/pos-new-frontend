@@ -148,11 +148,6 @@ const AddItem = () => {
         setColors("#9c27b0")
     }
 
-    
-    
-
-    
-
     const handleSave = () =>{
 
         dispatch(createItems(name,catg,description,price,cost,sku,barcode,inStock,lowStock,available,selectedValue,spiceLevel,color))
