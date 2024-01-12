@@ -36,10 +36,7 @@ const Items = () => {
         dispatch(categoryList())
         dispatch(ItemsList())
         dispatch(StockList())
-        const updateItem = {}
-        const getCategory = {}
-        localStorage.setItem("updateItem",JSON.stringify(updateItem))
-        localStorage.setItem("getCategory",JSON.stringify(getCategory))
+        
     }, [dispatch])
 
     useEffect(()=>{
@@ -51,7 +48,7 @@ const Items = () => {
     const { items } = useSelector((state) => state.items)
     const { stocks } = useSelector((state) => state.stocks)
     const {count } = useSelector((state)=>state.count)
-    console.log("...........",count)
+   
    
     
     const handleChange = (e) => {
@@ -253,7 +250,7 @@ const Items = () => {
 
                         <Button disabled={page <= 1 ? true : false} onClick={handlePreviousPage} ><ArrowBackIosIcon style={{ border: "0.5px solid black", padding: "5px" }} /></Button>
                         <Button onClick={handleNextPage} disabled={page<count?false:true} ><ArrowForwardIosIcon style={{ border: "0.5px solid black", padding: "5px" }} /></Button>
-                        <InputLabel id="demo-simple-select-label" style={{ marginLeft: "20px" }} >PageNo:</InputLabel>
+                        <InputLabel id="demo-simple-select-label" style={{ marginLeft: "20px" }} >Pages:{count}</InputLabel>
                         <div >
 
 
