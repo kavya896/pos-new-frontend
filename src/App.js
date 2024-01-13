@@ -11,6 +11,7 @@ import Successful from "./components/successful/successful";
 import Categories from "./components/Categories/Categories";
 import CreateCategories from "./components/Categories/CreateCategories";
 import UpdateCategories from "./components/Categories/UpdateCategory";
+import Qrcode from "./components/qrcode/qrcode";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/successful" element={<Successful/>}></Route>
         <Route path="/createCategory" element={<CreateCategories/>} ></Route>
         <Route path="/updateCategory" element={<UpdateCategories/>} ></Route>
+        <Route path="/qrcode" element={<Qrcode/>} ></Route>
       </Routes>
     </Router>
   
