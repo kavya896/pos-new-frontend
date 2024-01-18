@@ -28,7 +28,7 @@ const Items = () => {
     const [selectcatg, setSelectcatg] = useState("")
     const [open, setOpen] = useState(false)
     const [itemId,setItemId] = useState()
-    const [check,setCheck] = useState()
+    const [selectAll,setSelectAll] = useState(false)
 
     const dispatch = useDispatch()
 
@@ -89,21 +89,40 @@ const Items = () => {
     }
     // const refresh =localStorage.setItem("refresh",JSON.stringify({"refresh":true}))
     const [isChecked, setisChecked]= useState([]);
-   const handlecheckbox = (e)=>{
-    const {value, checked}= e.target;
-    console.log(value);
-    if(checked)
-    {
-      setisChecked([...isChecked, value]);
-    } else{
-      setisChecked(isChecked.filter( (e)=>e!== value));
+    const handlecheckbox = (ItemId)=>{
+       if(isChecked.includes(ItemId)){
+        setisChecked(isChecked.filter((id)=>id!==ItemId))
+       }else{
+            setisChecked([...isChecked,ItemId])
+       }
     }
-  }
+//    const handlecheckbox = (e)=>{
+//     const {value, checked}= e.target;
+//     console.log(value);
+//     if(checked)
+//     {
+//       setisChecked([...isChecked, value]);
+//     } else{
+//       setisChecked(isChecked.filter( (e)=>e!== value));
+//     }
+//   }
   const handledeleteCheckbox = () =>{
-   dispatch(deleteManyItems(isChecked))
-   window.location.reload()
-  }
+    if(selectAll){
+        const arr = []
+        items.map((item)=>{
+            arr.push(item._id)
+        })
+        dispatch(deleteManyItems(arr))
+           window.location.reload()
+    }else{
+        dispatch(deleteManyItems(isChecked))
+           window.location.reload()
+    }
 
+  }
+  const handleDeleteAll = ()=>{
+    setSelectAll(()=>!selectAll)
+  }
     return (
 
         <div>
@@ -114,7 +133,7 @@ const Items = () => {
 
                     <div className="addItems">
                         <Button style={{ backgroundColor: "#0f5171" }}><a href="/addItems" style={{ textDecoration: "none", color: "white" }}>+ADD ITEM</a></Button>
-                        {isChecked.length>0?<> <Button style={{ color: "white", backgroundColor:"red", marginLeft: "40px" }} onClick={handledeleteCheckbox}>Delete</Button></>:""}
+                        {isChecked.length>0 || selectAll ?<> <Button style={{ color: "white", backgroundColor:"red", marginLeft: "40px" }} onClick={handledeleteCheckbox}>Delete</Button></>:""}
                         <Button style={{ color: "black", marginLeft: "40px" }}>IMPORT</Button>
                         <Button style={{ color: "black" }}>EXPORT</Button>
 
@@ -208,7 +227,7 @@ const Items = () => {
                         <Table aria-label="simple table">
                             <TableHead sx={{ color: "red" }}>
                                 <TableRow >
-                                    <TableCell style={{ color: "rgba(154, 151, 151, 0.915)", padding: "5px" }}></TableCell>
+                                    <TableCell style={{ color: "rgba(154, 151, 151, 0.915)", padding: "5px" }}><Checkbox checked= {selectAll} onClick={handleDeleteAll}/></TableCell>
                                     <TableCell style={{ color: "rgba(154, 151, 151, 0.915)", padding: "5px" }}>Item Name</TableCell>
                                     <TableCell style={{ color: "rgba(154, 151, 151, 0.915)", padding: "5px" }} align="right">Category</TableCell>
                                     <TableCell style={{ color: "rgba(154, 151, 151, 0.915)", padding: "5px" }} align="right">Price</TableCell>
@@ -229,7 +248,7 @@ const Items = () => {
                                         
                                        
                                     >
-                                        <TableCell style={{ padding: "5px" }} ><Checkbox value={item._id}  onClick={(e)=>handlecheckbox(e)} /></TableCell>
+                                        <TableCell style={{ padding: "5px" }} ><Checkbox checked={selectAll || isChecked.includes(item._id)}  onClick={(e)=>handlecheckbox(item._id)} /></TableCell>
                                         <TableCell component="th" scope="row" style={{ padding: "5px" }} onClick={()=>navigate(`/updateItem/${item._id}`)}>
                                             {item.name}
                                         </TableCell>
